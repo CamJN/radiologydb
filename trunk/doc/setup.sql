@@ -68,4 +68,6 @@ CREATE TABLE pacs_images (
    FOREIGN KEY(record_id) REFERENCES radiology_record
 );
 
+CREATE SEQUENCE pic_id_sequence;
+
 insert into users (user_name, password) values('john', '12345', 'a', to_date('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));

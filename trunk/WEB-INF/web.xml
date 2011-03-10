@@ -13,5 +13,16 @@ version="2.4">
 	        <servlet-name>Login</servlet-name>
 	        <url-pattern>/login</url-pattern>
 	    </servlet-mapping>
+
+	    <servlet>
+                <servlet-name>UploadImage</servlet-name>
+                <servlet-class>UploadImage</servlet-class>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>UploadImage</servlet-name>
+                <url-pattern>/servlet/UploadImage</url-pattern>
+            </servlet-mapping>
+
+
 </web-app>
 
