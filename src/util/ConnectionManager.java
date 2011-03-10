@@ -3,9 +3,10 @@ package util;
 import java.sql.*;
 
 public class ConnectionManager {
-
-	static final String m_url = "oracle.jdbc.driver.OracleDriver";
-	static final String m_driverName = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:crs";
+	
+	static final String m_driverName = "oracle.jdbc.driver.OracleDriver";
+	static final String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+	
 	static final String m_userName = "username";
 	static final String m_password = "passwd";
 
@@ -24,7 +25,7 @@ public class ConnectionManager {
 
 		try {
 
-			m_con = DriverManager.getConnection(m_url, m_userName, m_password);
+			m_con = DriverManager.getConnection(dbstring, m_userName, m_password);
 			System.err.println("Conn Created");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
