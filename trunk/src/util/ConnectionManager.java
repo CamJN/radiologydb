@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConnectionManager {
 
 	static final String m_url = "oracle.jdbc.driver.OracleDriver";
-	static final String m_driverName = "jdbc:oracle.thin:@gwynne.cs.ualberta.ca:1521:crs";
+	static final String m_driverName = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:crs";
 	static final String m_userName = "username";
 	static final String m_password = "passwd";
 
@@ -28,6 +28,7 @@ public class ConnectionManager {
 			System.err.println("Conn Created");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			System.err.println("Exception here");
 			System.err.println("SQLException: " + e.getMessage());
 			e.printStackTrace();
 		}
