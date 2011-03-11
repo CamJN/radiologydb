@@ -1,19 +1,3 @@
-/***
- *  the table shall be created using the following
- *     CREATE TABLE pictures (
- *           pic_id int,
- *	        pic_desc  varchar(100),
- *		    pic  BLOB,
- *		        primary key(pic_id)
- *     );
- *
- *  One may also need to create a sequence using the following 
- *  SQL statement to automatically generate a unique pic_id:
- *
- *   CREATE SEQUENCE pic_id_sequence;
- *
- ***/
-
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -26,12 +10,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import javax.imageio.ImageIO;
 
-/**
- *  The package commons-fileupload-1.0.jar is downloaded from 
- *         http://jakarta.apache.org/commons/fileupload/ 
- *  and it has to be put under WEB-INF/lib/ directory in your servlet context.
- *  One shall also modify the CLASSPATH to include this jar file.
- */
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 
@@ -105,14 +83,7 @@ public class UploadImage extends HttpServlet {
 	    OutputStream full_outstream = fullBlob.getBinaryOutputStream();
 	    ImageIO.write(normalSize, "jpg", full_outstream);
 
-	    
-	    /*
-	    int size = myblob.getBufferSize();
-	    byte[] buffer = new byte[size];
-	    int length = -1;
-	    while ((length = instream.read(buffer)) != -1)
-		outstream.write(buffer, 0, length);
-	    */
+
 	    instream.close();
 	    thumb_outstream.close();
 	    reg_outstream.close();
