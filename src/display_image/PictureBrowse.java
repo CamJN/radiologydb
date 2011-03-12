@@ -33,23 +33,25 @@ public class PictureBrowse extends HttpServlet {//implements SingleThreadModel {
 	out.println("<h3>The List of Images </h3>");
 
      String argsString = request.getQueryString();//args was picid
+     // System.out.println("PictureBrowse: "+argsString);
      String args[]=argsString.split("&");
      String record_id="";
      for (int i =0;i<args.length;i++){
 	 if(args[i].startsWith("record_id=")){
-	     record_id=args[i].substring(11);
+	     record_id=args[i].substring(10);
 	 }else {
 	     //mangled url
 	 }
      }
-
+     //     System.out.println("PictureBrowse: "+record_id);
 
 	/*
 	 *   to execute the given query
 	 */
 	try {
-	    String query = "select image_id from pacs_images where record_id = "+record_id+";";
-
+	    
+	    String query = "select image_id from pacs_images where record_id = "+record_id;
+	    //System.out.println(query);
 	    Connection conn = getConnected();
 	    Statement stmt = conn.createStatement();
 	    ResultSet rset = stmt.executeQuery(query);
@@ -59,9 +61,9 @@ public class PictureBrowse extends HttpServlet {//implements SingleThreadModel {
 		p_id = (rset.getObject(1)).toString();
 
 	       // specify the servlet for the image
-               out.println("<a href=\"/yuan/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=regular_size\">");
+               out.println("<a href=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=regular_size\">");
 	       // specify the servlet for the thumbnail
-	       out.println("<img src=\"/yuan/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=thumbnail\"></a>");
+	       out.println("<img src=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=thumbnail\"></a>");
 	    }
 	    stmt.close();
 	    conn.close();
