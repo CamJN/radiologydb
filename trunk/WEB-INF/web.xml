@@ -23,6 +23,24 @@ version="2.4">
                 <url-pattern>/servlet/UploadImage</url-pattern>
             </servlet-mapping>
 
+	    <servlet>
+                <servlet-name>GetOnePic</servlet-name>
+                <servlet-class>GetOnePic</servlet-class>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>GetOnePic</servlet-name>
+                <url-pattern>/servlet/GetOnePic</url-pattern>
+            </servlet-mapping>
+
+	    <servlet>
+                <servlet-name>PictureBrowse</servlet-name>
+                <servlet-class>PictureBrowse</servlet-class>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>PictureBrowse</servlet-name>
+                <url-pattern>/servlet/PictureBrowse</url-pattern>
+            </servlet-mapping>
+
 
 </web-app>
 

@@ -14,26 +14,27 @@ import java.sql.*;
  *    GetOnePic?image_id=12&record_id=3&style=regular_size: sends the picture in regular_size with image_id = 12 and record_id = 3
  *
  */
-public class GetOnePic extends HttpServlet implements SingleThreadModel {
+public class GetOnePic extends HttpServlet {//implements SingleThreadModel {
 
  public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	//  construct the query  from the client's QueryString
      String argsString = request.getQueryString();//args was picid
+     // System.out.println("GetOnePic: "+argsString);
      String args[]=argsString.split("&");
      String image_id="", record_id="",style="";
      for (int i =0;i<args.length;i++){
 	 if(args[i].startsWith("image_id=")){
-	     image_id=args[i].substring(10);
+	     image_id=args[i].substring(9);
 	 }else if(args[i].startsWith("record_id=")){
-	     record_id=args[i].substring(11);
+	     record_id=args[i].substring(10);
 	 }else if(args[i].startsWith("style=")){
-	     style=args[i].substring(7);
+	     style=args[i].substring(6);
 	 }else {
 	     //mangled url
 	 }
-     }
-	String query = "select "+style+" from pacs_images where record_id = "+record_id+"AND image_id = "+image_id+";"; 
+     }//System.out.println("GetOnePic: image_id:"+image_id+" record_id:"+record_id+" style:"+style);
+	String query = "select "+style+" from pacs_images where record_id = "+record_id+"AND image_id = "+image_id; 
 
 	ServletOutputStream out = response.getOutputStream();
 

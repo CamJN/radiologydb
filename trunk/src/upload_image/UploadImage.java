@@ -23,22 +23,34 @@ public class UploadImage extends HttpServlet {
 	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 	int pic_id;
 
+	String record_id="";
+
 	try {
 	    //Parse the HTTP request to get the image stream
 	    DiskFileUpload fu = new DiskFileUpload();
 	    List FileItems = fu.parseRequest(request);
-	        
 	    // Process the uploaded items, assuming only 1 image file uploaded
 	    Iterator i = FileItems.iterator();
-	    FileItem item = (FileItem) i.next();
-	    int record_id=3;
-	    while (i.hasNext() && item.isFormField()) {
-		item = (FileItem) i.next();
+	    FileItem item;
+	    InputStream instream=null;
+	    //int record_id=3;
+	    System.out.println(FileItems.size());
+	    int inti=0;
+	    for (item = (FileItem) i.next(); instream==null || record_id.equals(""); item=(FileItem)i.next()) {
+		System.out.println(++inti);
+		if(item.isFormField()){
+		    if(item.getFieldName().equals("record_id")){
+			record_id=new String(item.get());
+			System.out.println("record_id"+record_id);
+		    }
+		}else{
+		    System.out.println("set instream");
+		    instream = item.getInputStream();
+		}
 		//get record_id from form
 	    }
-
 	    //Get the image stream
-	    InputStream instream = item.getInputStream();
+
 
 	    BufferedImage img = ImageIO.read(instream);
 	    BufferedImage thumbNail = shrink(img, 150);
