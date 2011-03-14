@@ -7,8 +7,8 @@ public class ConnectionManager {
 	static final String m_driverName = "oracle.jdbc.driver.OracleDriver";
 	static final String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 	
-	static final String m_userName = "username";
-	static final String m_password = "passwd";
+	static final String m_userName = "c391g1";
+	static final String m_password = "c3911337";
 
 	private Connection m_con = null;
 
@@ -28,10 +28,7 @@ public class ConnectionManager {
 			m_con = DriverManager.getConnection(dbstring, m_userName, m_password);
 			System.err.println("Conn Created");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.err.println("Exception here");
-			System.err.println("SQLException: " + e.getMessage());
-			e.printStackTrace();
+            System.out.println("Could not get SQL connection: " + e.getMessage());
 		}
 	}
 	
