@@ -40,7 +40,6 @@ version="2.4">
                 <servlet-name>PictureBrowse</servlet-name>
                 <url-pattern>/servlet/PictureBrowse</url-pattern>
             </servlet-mapping>
-
-
+        
 </web-app>
 
