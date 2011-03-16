@@ -1,29 +1,17 @@
-
 BIN = ../WEB-INF/classes
-LIB = ../WEB-INF/libs
+LIB = ../WEB-INF/lib
 UTIL= util/
 LOGIN= loginModule/
+SEARCH= search/
 UPLOAD= upload_image/
 DOWNLOAD= display_image/
 
+JAVAFILES := ${shell find -name '*.java' -type f -print}
 CPATH := $$CLASSPATH:$(BIN):$(LIB)/*:
 
-all: ConnectionManager.class UploadImage.class PictureBrowse.class LoginModule.class
-
-ConnectionManager.class: $(UTIL)ConnectionManager.java
-	javac -cp $(CPATH) -d $(BIN) $(UTIL)ConnectionManager.java
-
-LoginModule.class: $(LOGIN)LoginModule.java
-	javac -cp $(CPATH) -d $(BIN) $(LOGIN)LoginModule.java 
-
-UploadImage.class: $(UPLOAD)UploadImage.java
-	javac -cp $(CPATH) -d $(BIN) $(UPLOAD)UploadImage.java
-
-PictureBrowse.class: $(DOWNLOAD)PictureBrowse.java $(BIN)GetOnePic.class
-	javac -cp $(CPATH) -d $(BIN) $(DOWNLOAD)PictureBrowse.java
-
-$(BIN)GetOnePic.class: $(DOWNLOAD)GetOnePic.java 
-	javac -cp $(CPATH) -d $(BIN) $(DOWNLOAD)GetOnePic.java
+compile: $(JAVAFILES)
+	@echo COMPILE
+	@javac -d $(BIN) -cp $(CPATH) $(JAVAFILES)
 
 clean:
 	rm -f $(BIN)*.class

@@ -70,3 +70,6 @@ insert into pacs_images values (9, 1, empty_blob(), empty_blob(), empty_blob());
 insert into pacs_images values (10, 1, empty_blob(), empty_blob(), empty_blob());
 insert into pacs_images values (11, 1, empty_blob(), empty_blob(), empty_blob());
 insert into pacs_images values (12, 1, empty_blob(), empty_blob(), empty_blob());
+
+-- Indicies (MUST BE UPDATED ON INSERT)
+@index_records.sql;
