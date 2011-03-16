@@ -4,12 +4,13 @@
  *              Winter Term, 2011
  *  Author:     Prof. Li-Yan Yuan
  */
+DROP SEQUENCE pic_id_sequence;
+
 DROP TABLE persons;
 DROP TABLE family_doctor;
 DROP TABLE pacs_images;
 DROP TABLE radiology_record;
 DROP TABLE users;
-
 
 CREATE TABLE users (
    user_name varchar(24),
@@ -69,5 +70,3 @@ CREATE TABLE pacs_images (
 );
 
 CREATE SEQUENCE pic_id_sequence;
-
-insert into users (user_name, password) values('john', '12345', 'a', to_date('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'));
