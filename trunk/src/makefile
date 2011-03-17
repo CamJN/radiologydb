@@ -11,6 +11,7 @@ CPATH := $$CLASSPATH:$(BIN):$(LIB)/*:
 
 compile: $(JAVAFILES)
 	@echo COMPILE
+	touch ../WEB-INF/web.xml
 	@javac -d $(BIN) -cp $(CPATH) $(JAVAFILES)
 
 clean:
