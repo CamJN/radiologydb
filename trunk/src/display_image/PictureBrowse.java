@@ -26,6 +26,8 @@ public class PictureBrowse extends HttpServlet {//implements SingleThreadModel {
 
 	out.println("<html>");
 	out.println("<head>");
+
+	out.println("<script language=\"JavaScript\" type=\"text/javascript\" src=\"../contentflow.js\" load=\"DEFAULT\"></script>");
 	out.println("<title> Photo List </title>");
 	out.println("</head>");
 	out.println("<body bgcolor=\"#000000\" text=\"#cccccc\" >");
@@ -33,16 +35,8 @@ public class PictureBrowse extends HttpServlet {//implements SingleThreadModel {
 	out.println("<h3>The List of Images </h3>");
 
      String argsString = request.getQueryString();//args was picid
-     // System.out.println("PictureBrowse: "+argsString);
-     String args[]=argsString.split("&");
-     String record_id="";
-     for (int i =0;i<args.length;i++){
-	 if(args[i].startsWith("record_id=")){
-	     record_id=args[i].substring(10);
-	 }else {
-	     //mangled url
-	 }
-     }
+
+     String record_id = "1";
      //     System.out.println("PictureBrowse: "+record_id);
 
 	/*
@@ -57,14 +51,36 @@ public class PictureBrowse extends HttpServlet {//implements SingleThreadModel {
 	    ResultSet rset = stmt.executeQuery(query);
 	    String p_id;
 
+            out.println("<div style=\"width: 25%;\">");
+            //out.println("<div id=\"contentFlow\" class=\"ContentFlow\">");
+            out.println("<div id=\"contentFlow\" class=\"ContentFlow\" useAddOns\"DEFAULT\">");
+            //out.println("<div class=\"loadIndicator\"><div class=\"indicator\"></div></div>");
+            out.println("<div class=\"flow\">");
 	    while (rset.next() ) {
 		p_id = (rset.getObject(1)).toString();
-
+                
 	       // specify the servlet for the image
-               out.println("<a href=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=regular_size\">");
+               //out.println("<a href=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=regular_size\">");
+
+            out.println("<div class=\"item\">");
+            out.println("<img class=\"content\" src=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=thumbnail\">");
+            out.println("<div class=\"caption\">yo</div></div>");
+
 	       // specify the servlet for the thumbnail
-	       out.println("<img src=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=thumbnail\"></a>");
+	       //out.println("<img src=\"/radiologydb/servlet/GetOnePic?image_id="+p_id+"&record_id="+record_id+"&style=thumbnail\"></a>");
 	    }
+
+
+            out.println("</div>");
+            //out.println("<div class=\"globalCaption\"></div>");
+            out.println("<div class=\"scrollbar\">");
+            out.println("<div class=\"preButton\"></div>");
+            out.println("<div class=\"nextButton\"></div>");
+            out.println("<div class=\"slider\"><div class=\"position\"></div></div>");
+            out.println("</div>");
+	    out.println("</div>");
+            out.println("</div>");
+
 	    stmt.close();
 	    conn.close();
 	} catch ( Exception ex ){ out.println( ex.toString() );}

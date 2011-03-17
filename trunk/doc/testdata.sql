@@ -56,20 +56,6 @@ insert into radiology_record values (11, 'Oscar', 'd1', 'r1', 'US', '2/mar/2011'
 insert into radiology_record values (12, 'Camden', 'd2', 'r2', 'CAT', '3/mar/2011', '3/mar/2011', 'sinitus', 'Screening for sinitus.');
 
 -- pacs_images(record_id,image_id,thumbnail,regular_size,full_size)
-insert into pacs_images values (1, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (1, 2, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (1, 3, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (2, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (3, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (4, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (5, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (6, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (7, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (8, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (9, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (10, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (11, 1, empty_blob(), empty_blob(), empty_blob());
-insert into pacs_images values (12, 1, empty_blob(), empty_blob(), empty_blob());
 
 -- Indicies (MUST BE UPDATED ON INSERT)
 @index_records.sql;
