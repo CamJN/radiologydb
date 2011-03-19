@@ -32,11 +32,14 @@ public class ConnectionManager {
 		}
 	}
 	
-	public ResultSet exec(String query)
-	{
+	public ResultSet exec(String query) {
+		return exec(query, ResultSet.TYPE_FORWARD_ONLY);
+	}
+
+	public ResultSet exec(String query, int resultSetType) {
 		ResultSet rset = null;
 		try {
-			Statement stmt = m_con.createStatement();
+			Statement stmt = m_con.createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
 			rset = stmt.executeQuery(query);
 			//stmt.close();
 		} catch (SQLException e) {

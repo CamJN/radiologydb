@@ -78,7 +78,7 @@ new ContentFlowAddOn ('DEFAULT', {
         loadingTimeout: 30000,          // milliseconds
         activeElement: 'content',       // item or content
 
-        maxItemHeight: 100,               // 0 == auto, >0 max item height in px
+        maxItemHeight: 0,               // 0 == auto, >0 max item height in px
         scaleFactor: 1.0,               // overall scale factor of content
         scaleFactorLandscape: 1.33,     // scale factor of landscape images ('max' := height= maxItemHeight)
         scaleFactorPortrait: 1.0,       // scale factor of portraoit and square images ('max' := width = item width)
@@ -87,7 +87,7 @@ new ContentFlowAddOn ('DEFAULT', {
 
         circularFlow: true,             // should the flow wrap around at begging and end?
         verticalFlow: false,            // turn ContentFlow 90 degree counterclockwise
-        visibleItems: 1,               // how man item are visible on each side (-1 := auto)
+        visibleItems: 2,               // how man item are visible on each side (-1 := auto)
         endOpacity: 1,                  // opacity of last visible item on both sides
         startItem:  0,           // which item should be shown on startup?
         scrollInFrom: "pre",            // from where should be scrolled in?
@@ -104,7 +104,7 @@ new ContentFlowAddOn ('DEFAULT', {
         },
 
         reflectionColor: "transparent", // none, transparent, overlay or hex RGB CSS style #RRGGBB
-        reflectionHeight: 0.05,          // float (relative to original image height)
+        reflectionHeight: 0.2,          // float (relative to original image height)
         reflectionGap: 0.0,             // gap between the image and the reflection
 
 
@@ -243,8 +243,8 @@ new ContentFlowAddOn ('DEFAULT', {
             var vI = this.conf.visibleItems; 
 
             var f = 1 - 1/Math.exp( Math.abs(rP)*0.75);
-            var x =  item.side * vI/(vI+1)* f + rP/4; 
-            var y = 1;
+            var x =  item.side * vI/(vI+1)* f + rP/8; 
+            var y = 0.05;
 
             return {x: x, y: y};
         },

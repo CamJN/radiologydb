@@ -1,0 +1,47 @@
+body {
+    text-align:center;
+	background-color:#D4D4D4;
+}
+
+a {
+    text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;	
+}
+
+a:visited {
+	color:#551a8b;
+}
+
+div#header {
+    text-align:left;
+}
+
+div#content {
+    text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div#footer {
+	text-align:center;
+	margin-top:1em;
+}
+
+form#searchForm {
+	
+}
+
+input#searchInput {
+    font-size:1.25em;
+}
+
+input#searchButton {
+	font-size:1.25em;
+}
+
+span .list, div#header span, div#footer span {
+    margin-right:1em;
+}
