@@ -17,7 +17,7 @@ public class LoginModule extends HttpServlet {
 	throws ServletException, IOException {
 
 		response.setContentType("text/html");
-    		String username = request.getParameter("username");
+    	String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
 		PrintWriter out = response.getWriter();

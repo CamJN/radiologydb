@@ -43,11 +43,33 @@ public class ConnectionManager {
 			rset = stmt.executeQuery(query);
 			//stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.exit(1);
 		}
 		
 		return rset;
+	}
+
+	public void setAutoCommit(boolean v)
+	{
+		try {
+			m_con.setAutoCommit(v);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+
+	public void conCommit()
+	{
+		try {
+			m_con.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 
 	public void closeCon() {
@@ -57,6 +79,12 @@ public class ConnectionManager {
 			// TODO Auto-generated catch block
 			System.err.println("SQLException: " + e.getMessage());
 			e.printStackTrace();
+			System.exit(1);
 		}
+	}
+	
+	public Connection getCon()
+	{
+		return m_con;
 	}
 }
