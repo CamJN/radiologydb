@@ -1,5 +1,15 @@
 <html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="default.css" />
+    <link rel="stylesheet" type="text/css" href="search.css" />
+    <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
+    <title>RaySys</title>
+</head>
+
 <body>
+<%@ include file="header.jsp" %>
+<div style="text-align:center;">
 	<form action="newUser" method="post" accept-charset="utf-8">
 		<table border="0">
 			<tr><th>New User</th></tr>
@@ -39,5 +49,6 @@
 		</table>
 	<p><input type="submit" value="Add User"></p>
 	</form>
+</div>
 </body>
 </html>
