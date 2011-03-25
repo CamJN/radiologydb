@@ -31,10 +31,6 @@ public class LoginModule extends HttpServlet {
 		String userSearch = "select password, class from users where user_name = '"
 				+ username + "'";
 		
-		out.println("Username: " + username);
-		out.println("Password: " + password);
-		
-
 		try {
 			rset = conManager.exec(userSearch);
 
@@ -51,20 +47,18 @@ public class LoginModule extends HttpServlet {
 			// display the result
 			if (password.equals(truepwd))
 			{
-				out.println("<p><b>Your Login is Successful!</b></p>");
-				out.println("<p>" + userClass + "</p>");
 				HttpSession session = request.getSession(true);
-				session.setAttribute("username", username);
-				session.setAttribute("password", password);
 				session.setAttribute("class", userClass);
-
-				out.println("<A HREF=NextPage.jsp> Next <A/>");
+				session.setAttribute("username", username);
+				session.setMaxInactiveInterval(60*5);//5 minutes
+				conManager.closeCon();
+				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 			else
 				out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
 
 		} catch (SQLException ex) {
-
+			conManager.closeCon();
 			System.err.println("SQLException: " + ex.getMessage());
 
 		}

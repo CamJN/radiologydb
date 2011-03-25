@@ -23,6 +23,15 @@ version="2.4">
 	        <url-pattern>/newUser</url-pattern>
 	    </servlet-mapping>
 
+        <servlet>
+	        <servlet-name>UserUpdate</servlet-name>
+	        <servlet-class>management.UserUpdate</servlet-class>
+	    </servlet>
+	    <servlet-mapping>
+	        <servlet-name>UserUpdate</servlet-name>
+	        <url-pattern>/userUpdate</url-pattern>
+	    </servlet-mapping>
+
 
 	    <servlet>
                 <servlet-name>UploadImage</servlet-name>

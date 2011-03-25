@@ -77,11 +77,11 @@ public class NewUser extends HttpServlet {
 	        
 	        conManager.conCommit();
 	        conManager.setAutoCommit(true);
-	        out.print("Update Successful");
-	        out.println("<A HREF=NewUser.jsp> Back <A/>");
+	        conManager.closeCon();
+	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		} catch (SQLException ex) {
-
+			conManager.closeCon();
 			System.err.println("SQLException: " + ex.getMessage());
 
 		}
