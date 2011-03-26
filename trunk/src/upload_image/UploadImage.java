@@ -15,6 +15,7 @@ import org.apache.commons.fileupload.FileItem;
 
 public class UploadImage extends HttpServlet {
     public String response_message;
+
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 	//  change the following parameters to connect to the oracle database
 	String username = "c391g1";

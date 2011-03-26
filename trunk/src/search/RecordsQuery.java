@@ -11,17 +11,39 @@ public class RecordsQuery {
     private PicsQuery pics;
 
     public RecordsQuery(String searchInput) throws SQLException {
+        this(searchInput, null, null, false);
+    }
+
+    public RecordsQuery(String searchInput, boolean orderByDate) throws SQLException {
+        this(searchInput, null, null, orderByDate);
+    }
+
+    public RecordsQuery(String searchInput, String startDate, String endDate, boolean orderByDate) throws SQLException {
         if (searchInput == null || searchInput.equals("")) return;
         
-        recordsQuery = new Query(
-            "SELECT (6*score(1) + 3*score(2) + score(3)) as myscore, record_id, patient_name, doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +
-           " FROM radiology_record" +
-           " WHERE contains(patient_name, '"+searchInput+"', 1) > 0 or"+
-                 " contains(diagnosis, '"+searchInput+"', 2) > 0 or"+
-                 " contains(description, '"+searchInput+"', 3) > 0"+
-           " order by myscore desc",
-           ResultSet.TYPE_SCROLL_INSENSITIVE
-        );
+        String query = 
+         "SELECT (6*score(1) + 3*score(2) + score(3)) as myscore, record_id, patient_name, doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +
+        " FROM radiology_record" +
+        " WHERE (contains(patient_name, '"+searchInput+"', 1) > 0 OR"+
+              " contains(diagnosis, '"+searchInput+"', 2) > 0 OR"+
+              " contains(description, '"+searchInput+"', 3) > 0)";
+        
+        if (startDate != null && !startDate.equals("")) {
+            query += " AND test_date >= to_date('" + startDate + "', 'dd/MM/yyyy')";
+        }
+        
+        if (endDate != null && !endDate.equals("")) {
+            query += " AND test_date <= to_date('" + endDate + "', 'dd/MM/yyyy')";
+        }
+        
+        if (orderByDate) {
+            query += " ORDER BY test_date";
+        } else {
+            query += " ORDER BY myscore";
+        }
+        
+        System.out.println("query: " + query);
+        recordsQuery = new Query(query, ResultSet.TYPE_SCROLL_INSENSITIVE);
     }
     
     public boolean absolute(int row) throws SQLException {
@@ -30,6 +52,10 @@ public class RecordsQuery {
             return true;
         }
         return false;
+    }
+
+    public int getRecordCount() throws SQLException {
+        return recordsQuery.getRowCount();
     }
 
     public boolean nextRecord() throws SQLException {

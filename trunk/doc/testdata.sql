@@ -48,12 +48,21 @@ insert into radiology_record values (3, 'p1', 'd1', 'r1', 'US', '4/mar/2011', '4
 insert into radiology_record values (4, 'p1', 'd1', 'r1', 'MRI', '4/mar/2011', '4/mar/2011', 'sinitus', 'Screening for sinitus.');
 insert into radiology_record values (5, 'p1', 'd2', 'r2', 'CAT', '5/mar/2011', '5/mar/2011', 'kidney stones', 'Screening for kidney stones.');
 insert into radiology_record values (6, 'p1', 'd2', 'r2', 'CAT', '5/mar/2011', '5/mar/2011', 'fractured rib', 'Complaining of chest pain - has fractured rib.');
-insert into radiology_record values (7, 'p3', 'd3', 'r1', 'MRI', '7/mar/2011', '7/mar/2011', 'no sinitus', 'Screening for sinitus.');
-insert into radiology_record values (8, 'p3', 'd3', 'r1', 'MRI', '4/mar/2011', '4/mar/2011', 'no abnormalities', 'Brain is free from abnormalities.');
-insert into radiology_record values (9, 'Steven', 'd2', 'r1', 'MRI', '5/mar/2011', '5/mar/2011', 'arachnoid cyst', 'Determining cause of head pain.');
-insert into radiology_record values (10, 'Steven', 'd2', 'r2', 'CAT', '6/mar/2011', '6/mar/2011', 'fractured cranium', 'Determine cause of head inflamation.');
-insert into radiology_record values (11, 'Oscar', 'd1', 'r1', 'US', '2/mar/2011', '2/mar/2011', 'heart ok', 'Screening for heart problems.');
-insert into radiology_record values (12, 'Camden', 'd2', 'r2', 'CAT', '3/mar/2011', '3/mar/2011', 'sinitus', 'Screening for sinitus.');
+insert into radiology_record values (7, 'p1', 'd1', 'r1', 'MRI', '6/mar/2011', '6/mar/2011', 'no cancer', '2 Screening for brain cancer.');
+insert into radiology_record values (8, 'p1', 'd1', 'r1', 'CAT', '7/mar/2011', '7/mar/2011', 'cancer', '2 Screening for lung cancer.');
+insert into radiology_record values (9, 'p1', 'd1', 'r1', 'US', '8/mar/2011', '9/mar/2011', 'heart ok', '2 Screening for heart problems.');
+insert into radiology_record values (10, 'p1', 'd1', 'r1', 'MRI', '9/mar/2011', '10/mar/2011', 'sinitus', '2 Screening for sinitus.');
+insert into radiology_record values (11, 'p1', 'd2', 'r2', 'CAT', '10/mar/2011', '11/mar/2011', 'kidney stones', '2 Screening for kidney stones.');
+insert into radiology_record values (12, 'p1', 'd2', 'r2', 'CAT', '11/mar/2011', '12/mar/2011', 'fractured rib', '2 Complaining of chest pain - has fractured rib.');
+
+
+
+insert into radiology_record values (13, 'p3', 'd3', 'r1', 'MRI', '7/mar/2011', '7/mar/2011', 'no sinitus', 'Screening for sinitus.');
+insert into radiology_record values (14, 'p3', 'd3', 'r1', 'MRI', '4/mar/2011', '4/mar/2011', 'no abnormalities', 'Brain is free from abnormalities.');
+insert into radiology_record values (15, 'Steven', 'd2', 'r1', 'MRI', '5/mar/2011', '5/mar/2011', 'arachnoid cyst', 'Determining cause of head pain.');
+insert into radiology_record values (16, 'Steven', 'd2', 'r2', 'CAT', '6/mar/2011', '6/mar/2011', 'fractured cranium', 'Determine cause of head inflamation.');
+insert into radiology_record values (17, 'Oscar', 'd1', 'r1', 'US', '2/mar/2011', '2/mar/2011', 'heart ok', 'Screening for heart problems.');
+insert into radiology_record values (18, 'Camden', 'd2', 'r2', 'CAT', '3/mar/2011', '3/mar/2011', 'sinitus', 'Screening for sinitus.');
 
 -- pacs_images(record_id,image_id,thumbnail,regular_size,full_size)
 

@@ -34,12 +34,8 @@ form#searchForm {
 	
 }
 
-input#searchInput {
+input#searchInput, input#searchButton {
     font-size:1.25em;
-}
-
-input#searchButton {
-	font-size:1.25em;
 }
 
 span .list, div#header span, div#footer span {
