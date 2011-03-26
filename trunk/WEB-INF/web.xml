@@ -59,7 +59,17 @@ version="2.4">
                 <servlet-name>PictureBrowse</servlet-name>
                 <url-pattern>/servlet/PictureBrowse</url-pattern>
             </servlet-mapping>
+
+
+	    <servlet>
+                <servlet-name>CreateRecord</servlet-name>
+                <servlet-class>CreateRecord</servlet-class>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>CreateRecord</servlet-name>
+                <url-pattern>/servlet/CreateRecord</url-pattern>
+            </servlet-mapping>
         
-	<servlet></servlet>
+
 </web-app>
 
