@@ -1,90 +1,45 @@
 package util;
 
+import oracle.jdbc.pool.OracleConnectionPoolDataSource;
+import oracle.jdbc.pool.OracleConnectionCacheImpl;
+
 import java.sql.*;
 
 public class ConnectionManager {
-	
-	static final String m_driverName = "oracle.jdbc.driver.OracleDriver";
-	static final String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-	
-	static final String m_userName = "c391g1";
-	static final String m_password = "c3911337";
+    
+    private static OracleConnectionPoolDataSource dataSource;
+    private static OracleConnectionCacheImpl connectionCache;
+    
+    static { initCache(); }
 
-	private Connection m_con = null;
+    private ConnectionManager() {}
+    
+    public static Connection getConnection() throws SQLException {
+        return connectionCache.getConnection();
+    }
 
-	public ConnectionManager() {
-		try {
-			@SuppressWarnings("rawtypes")
-			Class drvClass = Class.forName(m_driverName);
-			DriverManager.registerDriver((Driver) drvClass.newInstance());
-		} catch (Exception e) {
-			System.err.print("ClassNotFoundException: ");
-			System.err.println(e.getMessage());
-
-		}
-
-		try {
-
-			m_con = DriverManager.getConnection(dbstring, m_userName, m_password);
-			System.err.println("Conn Created");
-		} catch (SQLException e) {
-            System.out.println("Could not get SQL connection: " + e.getMessage());
-		}
-	}
-	
-	public ResultSet exec(String query) {
+	public static ResultSet exec(String query) throws SQLException {
 		return exec(query, ResultSet.TYPE_FORWARD_ONLY);
 	}
 
-	public ResultSet exec(String query, int resultSetType) {
-		ResultSet rset = null;
-		try {
-			Statement stmt = m_con.createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
-			rset = stmt.executeQuery(query);
-			//stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-		
-		return rset;
-	}
-
-	public void setAutoCommit(boolean v)
-	{
-		try {
-			m_con.setAutoCommit(v);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
-
-	public void conCommit()
-	{
-		try {
-			m_con.commit();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
-
-	public void closeCon() {
-		try {
-			m_con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.err.println("SQLException: " + e.getMessage());
-			e.printStackTrace();
-			System.exit(1);
-		}
+	public static ResultSet exec(String query, int resultSetType) throws SQLException {
+		Statement s = getConnection().createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
+		return s.executeQuery(query);
 	}
 	
-	public Connection getCon()
-	{
-		return m_con;
-	}
+    private static void initCache() {
+        try {
+            dataSource = new OracleConnectionPoolDataSource();
+            dataSource.setURL("jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS");
+            dataSource.setUser("c391g1");
+            dataSource.setPassword("c3911337");
+            
+            connectionCache = new OracleConnectionCacheImpl(dataSource);
+            connectionCache.setMaxLimit(10);
+            connectionCache.setCacheScheme(OracleConnectionCacheImpl.FIXED_WAIT_SCHEME);
+        } catch (SQLException e) {
+            throw new Error("Could not initialize data source.");
+        }
+    }
+
 }
