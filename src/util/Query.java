@@ -23,7 +23,7 @@ public class Query {
 
     public Query(String query, int resultSetType) throws SQLException {
         connectionManager = new ConnectionManager();
-        resultSet = connectionManager.exec(query, resultSetType);
+        resultSet = connectionManager.exec(query, resultSetType); //TODO sanitize input
         metaData = resultSet.getMetaData();
         columnCount = metaData.getColumnCount();
     }
@@ -38,6 +38,16 @@ public class Query {
 
     public String getString(int column) throws SQLException {
         return resultSet.getString(column);
+    }
+    
+    public int getRowCount() throws SQLException {
+        int initialRow = resultSet.getRow();
+        resultSet.last();
+        int lastRow = resultSet.getRow();
+        if (initialRow != 0) resultSet.absolute(initialRow);
+        else resultSet.beforeFirst();
+        
+        return lastRow;
     }
 
     public void close() throws SQLException {

@@ -1,0 +1,3 @@
+Calendar Popup: http://www.mattkruse.com/javascript/calendarpopup/index.html
+
+ContentFlow: http://www.jacksasylum.eu/ContentFlow/
