@@ -1,22 +1,10 @@
-<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
   <head> 
     <title>Create a Record</title> 
   </head>
+  <%@ include file="header.jsp" %>
   <body> 
-    <!--
-	radiology_record(
-	record_id,
-	patient_name,
-	doctor_name,
-	radiologist_name,
-	test_type,
-	prescribing_date,
-	test_date,
-	diagnosis,
-	description
-	)
-      -->
     <form name="create-record" method="POST" enctype="multipart/form-data" action="servlet/CreateRecord">
       Please enter record data!
       <table>
@@ -55,7 +43,6 @@
 	<tr>
 	  <th>Description: </th>
 	  <td>
-	    <!--input name="description" type="text" size="1024" ></input-->
 	    <TEXTAREA NAME="description" ROWS="8" COLS="128"></TEXTAREA>
 	  </td>
 	</tr>
