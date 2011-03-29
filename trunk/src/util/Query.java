@@ -3,6 +3,7 @@ package util;
 import java.sql.*;
 
 import util.ConnectionManager;
+import util.ConnectionManager.ConnectionKit;
 
 /**
  *
@@ -13,16 +14,22 @@ public class Query {
     protected ResultSet resultSet;
     protected ResultSetMetaData metaData;
     protected int columnCount;
-    private ConnectionManager connectionManager;
+    private ConnectionKit connectionKit;
     
     public Query(String query) throws SQLException {
         this(query, ResultSet.TYPE_FORWARD_ONLY);
     }
 
+    public Query(String query, Object... statementParameters) throws SQLException {
+        connectionKit = new ConnectionKit();
+        resultSet = connectionKit.exec(query, statementParameters);
+        metaData = resultSet.getMetaData();
+        columnCount = metaData.getColumnCount();
+    }
+
     public Query(String query, int resultSetType) throws SQLException {
-        Connection c = ConnectionManager.getConnection();
-        Statement s = c.createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
-        resultSet = s.executeQuery(query);
+        connectionKit = new ConnectionKit();
+        resultSet = connectionKit.exec(query, resultSetType);
         metaData = resultSet.getMetaData();
         columnCount = metaData.getColumnCount();
     }
@@ -50,8 +57,7 @@ public class Query {
     }
 
     public void close() throws SQLException {
-        resultSet.close();
-        //connectionManager.closeCon(); //TODO
+        connectionKit.close();
     }
 
 }
