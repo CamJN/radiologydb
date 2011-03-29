@@ -1,8 +1,6 @@
 package util;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 
 import util.ConnectionManager;
 
@@ -22,8 +20,9 @@ public class Query {
     }
 
     public Query(String query, int resultSetType) throws SQLException {
-        connectionManager = new ConnectionManager();
-        resultSet = connectionManager.exec(query, resultSetType); //TODO sanitize input
+        Connection c = ConnectionManager.getConnection();
+        Statement s = c.createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
+        resultSet = s.executeQuery(query);
         metaData = resultSet.getMetaData();
         columnCount = metaData.getColumnCount();
     }
@@ -52,7 +51,7 @@ public class Query {
 
     public void close() throws SQLException {
         resultSet.close();
-        connectionManager.closeCon(); //TODO
+        //connectionManager.closeCon(); //TODO
     }
 
 }
