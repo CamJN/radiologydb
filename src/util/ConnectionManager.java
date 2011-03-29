@@ -4,6 +4,8 @@ import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 import oracle.jdbc.pool.OracleConnectionCacheImpl;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ConnectionManager {
     
@@ -17,15 +19,6 @@ public class ConnectionManager {
     public static Connection getConnection() throws SQLException {
         return connectionCache.getConnection();
     }
-
-	public static ResultSet exec(String query) throws SQLException {
-		return exec(query, ResultSet.TYPE_FORWARD_ONLY);
-	}
-
-	public static ResultSet exec(String query, int resultSetType) throws SQLException {
-		Statement s = getConnection().createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
-		return s.executeQuery(query);
-	}
 	
     private static void initCache() {
         try {
@@ -40,6 +33,50 @@ public class ConnectionManager {
         } catch (SQLException e) {
             throw new Error("Could not initialize data source.");
         }
+    }
+
+    public static class ConnectionKit {
+
+        private Connection connection;
+        private List<Statement> statements; //Keeping a list of statements to close because pooled connections may not do this
+
+        public ConnectionKit() throws SQLException {
+            this(true);
+        }
+        
+        public ConnectionKit(boolean autoCommit) throws SQLException {
+            connection = ConnectionManager.getConnection();
+            connection.setAutoCommit(autoCommit);
+            
+            statements = new ArrayList<Statement>();
+        }
+        
+        public ResultSet exec(String query) throws SQLException {
+            return exec(query, ResultSet.TYPE_FORWARD_ONLY);
+        }
+        
+        public ResultSet exec(String query, int resultSetType) throws SQLException {
+            Statement s = connection.createStatement(resultSetType, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = s.executeQuery(query);
+            statements.add(s);
+            return rs;
+        }
+        
+        public ResultSet exec(String query, Object... statementParameters) throws SQLException {
+            PreparedStatement ps = connection.prepareStatement(query);
+            for (int i = 0; i < statementParameters.length; i++) {
+                ps.setObject(i, statementParameters[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            statements.add(ps);
+            return rs;
+        }
+        
+        public void close() throws SQLException {
+            for (Statement s : statements) s.close();
+            connection.close();
+        }
+
     }
 
 }
