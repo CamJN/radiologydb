@@ -13,6 +13,12 @@ public class IndexUpdate {
 	private static final String createRadioDiag = "CREATE INDEX radiodiag_index ON radiology_record(diagnosis) INDEXTYPE IS CTXSYS.CONTEXT";
 	private static final String createRadioDesc = "CREATE INDEX radiodesc_index ON radiology_record(description) INDEXTYPE IS CTXSYS.CONTEXT";
 	
+	private static final String dropFname = "DROP INDEX fname_index";
+	private static final String dropLname = "DROP INDEX lname_index";
+	
+	private static final String createFname = "CREATE INDEX fname_index ON persons(first_name) INDEXTYPE IS CTXSYS.CONTEXT";
+	private static final String createLname = "CREATE INDEX fname_index ON persons(last_name) INDEXTYPE IS CTXSYS.CONTEXT";
+	
 	public static void updateRadiologyIndex(Statement stmt) throws SQLException
 	{
 		stmt.executeQuery(dropRadioName);
@@ -22,6 +28,15 @@ public class IndexUpdate {
 		stmt.executeQuery(createRadioName);
 		stmt.executeQuery(createRadioDiag);
 		stmt.executeQuery(createRadioDesc);
+	}
+	
+	public static void updatePersonIndex(Statement stmt) throws SQLException
+	{
+		stmt.executeQuery(dropFname);
+		stmt.executeQuery(dropLname);
+		
+		stmt.executeQuery(createFname);
+		stmt.executeQuery(createLname);
 	}
 
 }
