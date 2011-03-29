@@ -37,12 +37,11 @@ public class NewUser extends HttpServlet {
 
 		String checkUserName = "select count(*) from users where user_name='" + username + "'";
 		
-		
-        
-		
 
 		try {
-			Connection conn = ConnectionManager.getConnection();
+
+            Connection conn = ConnectionManager.getConnection();
+
 			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			rset = stmt.executeQuery(checkUserName);
 			String count = "";
@@ -79,6 +78,7 @@ public class NewUser extends HttpServlet {
 	        
 	        conn.commit();
 	        conn.setAutoCommit(true);
+            conn.close();
 	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		} catch (SQLException ex) {
