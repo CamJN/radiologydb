@@ -3,10 +3,8 @@ package loginModule;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.util.*;
 import java.sql.*;
 
-import javax.servlet.*;
 import javax.servlet.http.HttpSession;
 
 import util.ConnectionManager;
@@ -41,7 +39,6 @@ public class LoginModule extends HttpServlet {
 			{
 				truepwd = (rset.getString(1)).trim();
 				userClass = rset.getString(2).trim();
-
 			}
 
             conn.close();
