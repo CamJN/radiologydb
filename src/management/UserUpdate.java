@@ -28,24 +28,19 @@ public class UserUpdate extends HttpServlet {
 		String phone = request.getParameter("phone");
 
 		PrintWriter out = response.getWriter();
-		
 				
-		ConnectionManager conManager = new ConnectionManager();
-		Connection conn = conManager.getCon();
 		ResultSet rset = null;
 		
 
 		String checkUserName = "select count(*) from users where user_name='" + username + "'";
-		
-		
-        
-		
 
 		try {
-			rset = conManager.exec(checkUserName);
+			Connection conn = ConnectionManager.getConnection();
+			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			rset = stmt.executeQuery(checkUserName);
 			String count = "";
 			
-			conManager.setAutoCommit(false);
+			conn.setAutoCommit(false);
 			Date currentDatetime = new Date(System.currentTimeMillis());  
 	        java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime());  
 	   
@@ -65,15 +60,13 @@ public class UserUpdate extends HttpServlet {
 	        statement.setString(6, username);
 	        statement.execute();
 	        
-	        conManager.conCommit();
-	        conManager.setAutoCommit(true);
-	        conManager.closeCon();
+	        conn.commit();
+	        conn.setAutoCommit(true);
 	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		} catch (SQLException ex) {
-			conManager.closeCon();
+			out.println("<p>Error occurred</p>");
 			System.err.println("SQLException: " + ex.getMessage());
-
 		}
 		
 		

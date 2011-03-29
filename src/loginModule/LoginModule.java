@@ -23,16 +23,16 @@ public class LoginModule extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 				
-		ConnectionManager conManager = new ConnectionManager();
-
-		Statement stmt;
+		Connection conn;
 		ResultSet rset = null;
 
 		String userSearch = "select password, class from users where user_name = '"
 				+ username + "'";
 		
 		try {
-			rset = conManager.exec(userSearch);
+			conn = ConnectionManager.getConnection();
+			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			rset = stmt.executeQuery(userSearch);
 
 			String truepwd = "";
 			String userClass = "";
@@ -51,14 +51,13 @@ public class LoginModule extends HttpServlet {
 				session.setAttribute("class", userClass);
 				session.setAttribute("username", username);
 				session.setMaxInactiveInterval(60*5);//5 minutes
-				conManager.closeCon();
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 			else
 				out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
 
 		} catch (SQLException ex) {
-			conManager.closeCon();
+			out.println("<p>Could not connecect to server</p>");
 			System.err.println("SQLException: " + ex.getMessage());
 
 		}

@@ -30,8 +30,8 @@ public class NewUser extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 				
-		ConnectionManager conManager = new ConnectionManager();
-		Connection conn = conManager.getCon();
+		
+		
 		ResultSet rset = null;
 		
 
@@ -42,7 +42,9 @@ public class NewUser extends HttpServlet {
 		
 
 		try {
-			rset = conManager.exec(checkUserName);
+			Connection conn = ConnectionManager.getConnection();
+			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			rset = stmt.executeQuery(checkUserName);
 			String count = "";
 			
 			while (rset != null && rset.next())
@@ -54,7 +56,7 @@ public class NewUser extends HttpServlet {
 				out.println("User_name already being used!");
 				return;
 			}
-			conManager.setAutoCommit(false);
+			conn.setAutoCommit(false);
 			Date currentDatetime = new Date(System.currentTimeMillis());  
 	        java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime());  
 	   
@@ -75,13 +77,11 @@ public class NewUser extends HttpServlet {
 	        statement.setString(6, phone);
 	        statement.execute();
 	        
-	        conManager.conCommit();
-	        conManager.setAutoCommit(true);
-	        conManager.closeCon();
+	        conn.commit();
+	        conn.setAutoCommit(true);
 	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		} catch (SQLException ex) {
-			conManager.closeCon();
 			System.err.println("SQLException: " + ex.getMessage());
 
 		}
