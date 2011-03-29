@@ -44,6 +44,7 @@ public class LoginModule extends HttpServlet {
 
 			}
 
+            conn.close();
 			// display the result
 			if (password.equals(truepwd))
 			{
