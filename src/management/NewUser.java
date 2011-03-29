@@ -3,14 +3,10 @@ package management;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.util.*;
 import java.sql.*;
-import java.sql.Date;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpSession;
 
 import util.ConnectionManager;
+import util.IndexUpdate;
 
 @SuppressWarnings("serial")
 public class NewUser extends HttpServlet {
@@ -75,6 +71,7 @@ public class NewUser extends HttpServlet {
 	        statement.setString(5, email);
 	        statement.setString(6, phone);
 	        statement.execute();
+	        
 	        
 	        conn.commit();
 	        conn.setAutoCommit(true);

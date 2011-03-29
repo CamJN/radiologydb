@@ -3,12 +3,7 @@ package management;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.util.*;
 import java.sql.*;
-import java.sql.Date;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpSession;
 
 import util.ConnectionManager;
 
@@ -41,10 +36,17 @@ public class UserUpdate extends HttpServlet {
 			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			rset = stmt.executeQuery(checkUserName);
 			String count = "";
+			while (rset != null && rset.next())
+			{
+				count = (rset.getString(1)).trim();
+			}
+			if(!count.equals("1"))
+			{
+				out.println("User_name does not exist!");
+				return;
+			}
 			
 			conn.setAutoCommit(false);
-			Date currentDatetime = new Date(System.currentTimeMillis());  
-	        java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime());  
 	   
 	        PreparedStatement statement = null;  
 			statement = conn.prepareStatement("update users set password=?,class=cast(? as char(1)) where user_name=?");  

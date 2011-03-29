@@ -16,4 +16,4 @@ compile: $(JAVAFILES)
 	@javac -d $(BIN) -cp $(CPATH) $(JAVAFILES)
 
 clean:
-	rm -f $(BIN)/*
+	rm -rf $(BIN)/*
