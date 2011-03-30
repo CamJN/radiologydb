@@ -16,9 +16,9 @@
 <%@ include file="header.jsp" %>
 
 <%
-ConnectionManager conManager = new ConnectionManager();
-
-ResultSet rset = conManager.exec("select u.user_name, u.password, u.class, p.first_name, p.last_name, p.address, p.email, p.phone from users u, persons p, radiology_record r where record_id ="+ request.getParameter("record") +"and u.user_name = r.patient_name and u.user_name = p.user_name");
+Connection conn = ConnectionManager.getConnection();
+Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+ResultSet rset = stmt.executeQuery("select u.user_name, u.password, u.class, p.first_name, p.last_name, p.address, p.email, p.phone from users u, persons p where u.user_name ='"+ request.getParameter("uname") +"' and u.user_name =  p.user_name");
 rset.next();
 %>
 	<form action="userUpdate" method="post" accept-charset="utf-8">
@@ -61,5 +61,6 @@ rset.next();
 		</table>
 	<p><input type="submit" value="Update User"></p>
 	</form>
+<%conn.close();%>
 </body>
 </html>
