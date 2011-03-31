@@ -3,16 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="default.css" />
+    <%@ include file="header.html" %>
     <link rel="stylesheet" type="text/css" href="index.css" />
-    <title>RaySys</title>
-
     <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" src="CalendarPopup.js"></script>
     <script language="JavaScript">document.write(getCalendarStyles());</script>
-    <script language="JavaScript">
-        var cal = new CalendarPopup("testdiv1");
-    </SCRIPT>
+    <script language="JavaScript">var cal = new CalendarPopup("testdiv1");</SCRIPT>
 </head>
 
 <body onLoad="document.searchForm.searchInput.focus()">
@@ -35,13 +31,10 @@
 
             <input name="searchButton" id="searchButton" type="submit" value="Search">
         </form>
-	<div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
     </div>
 </div>
 
-<div id="footer">
-    <span><a href="about">About RaySys</a>
-</div>
+<%@ include file="footer.jsp" %>
 
 </body>
 

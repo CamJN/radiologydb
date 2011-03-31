@@ -28,18 +28,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-
-    <link rel="stylesheet" type="text/css" href="default.css" />
+	<%@ include file="header.html" %>
     <link rel="stylesheet" type="text/css" href="search.css" />
     <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" src="CalendarPopup.js"></script>
     <script language="JavaScript">document.write(getCalendarStyles());</script>
-    <script language="JavaScript">
-        var cal = new CalendarPopup("testdiv1");
-    </SCRIPT>
-    <title>RaySys</title>
+    <script language="JavaScript">var cal = new CalendarPopup("testdiv1");</SCRIPT>
 </head>
 
+<body>
 <%@ include file="header.jsp" %>
 
 <div id="content">
@@ -55,7 +52,6 @@
             <input type="text" NAME="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" SIZE=15>
             <input type="checkbox" name="order" id="order" value="date" <%if (ORDERBY_DATE) out.print("checked");%>"/>Order By Date
         </form>
-        <div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
     </div>
     <div id="results">
          <%
@@ -118,7 +114,7 @@
 						 out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");
 					 }
 					 out.println("<br/>");
-					 out.println("<span>Showing results "+ (START_INDEX) + " to " + (index+START_INDEX-2) + " of " + recordCount + " results</span>");
+					 out.println("<span>Showing "+ (START_INDEX) + " - " + (index+START_INDEX-2) + " of " + recordCount + " results</span>");
 					 out.println("</div>");
 				 } else {
 				     out.println("No records containing your search terms were found.");
@@ -133,9 +129,8 @@
 
 </div>
 
-<div id="footer">
-    <span><a href="about">About RaySys</a>
-</div>
+
+<%@ include file="footer.jsp" %>
 
 </body>
 
