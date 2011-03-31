@@ -61,11 +61,13 @@ public class ConnectionManager {
             statements.add(s);
             return rs;
         }
-        
+
         public ResultSet exec(String query, Object... statementParameters) throws SQLException {
-            PreparedStatement ps = connection.prepareStatement(query);
-            for (int i = 0; i < statementParameters.length; i++) {
-                ps.setObject(i, statementParameters[i]);
+            PreparedStatement ps = connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            for (int p = 1, i = 0; i < statementParameters.length; i++) {
+                Object o = statementParameters[i];
+                if (o == null) continue;
+                ps.setObject(p++, o);
             }
             ResultSet rs = ps.executeQuery();
             statements.add(ps);
