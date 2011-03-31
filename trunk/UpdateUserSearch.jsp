@@ -48,12 +48,6 @@
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>">
             <input name="searchButton" id="searchButton" type="submit" value="Search">
             <br />
-                        <a href="#" onClick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;" name="anchor1" id="startDateAnchor">Start Date</A>
-            <input type="text" NAME="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" SIZE=15>
-
-            <a href="#" onClick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" name="endDateAnchor" id="endDateAnchor">End Date</A>
-            <input type="text" NAME="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" SIZE=15>
-            <input type="checkbox" name="order" id="order" value="date" <%if (ORDERBY_DATE) out.print("checked");%>"/>Order By Date
         </form>
         <div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
     </div>

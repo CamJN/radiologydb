@@ -25,14 +25,6 @@
         <form name="userSearchForm" id="userSearchForm" action="UpdateUserSearch.jsp" method="get">
             <input name="searchInput" id="searchInput" value="" type="text"><br />
 
-            <a href="#" onClick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;" name="anchor1" id="startDateAnchor">Start Date</A>
-            <input type="text" name="startDate" id="startDate" value="" SIZE=15>
-
-            <a href="#" onClick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" name="endDateAnchor" id="endDateAnchor">End Date</A>
-            <input type="text" name="endDate" id="endDate" value="" SIZE=15>
-            <input type="checkbox" name="order" id="order" value="date"/>Order By Date
-            <br />
-
             <input name="searchButton" id="searchButton" type="submit" value="Search">
         </form>
 	<div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
