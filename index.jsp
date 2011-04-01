@@ -6,7 +6,7 @@
 <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
 <script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
-<script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("testdiv1");</script>
+<script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
 </head>
 <body onload="document.searchForm.searchInput.focus()">
 <%@ include file="header.jsp" %>
@@ -25,6 +25,7 @@
             <input name="searchButton" id="searchButton" type="submit" value="Search" />
         </form>
     </div>
+    <div id="caldiv"></div>
 </div>
 
 <%@ include file="footer.jsp" %>

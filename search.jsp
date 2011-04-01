@@ -35,7 +35,7 @@
     <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
-    <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("testdiv1");</script>
+    <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>" />
             <input name="searchButton" id="searchButton" type="submit" value="Search" />
             <br />
-            <a href="#" onclick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;" name="anchor1" id="startDateAnchor">Start Date</a>
+            <a name="startDateAnchor" id="startDateAnchor" href="#" onclick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;">Start Date</a>
             <input type="text" name="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" size="15" />
             <a name="endDateAnchor" id="endDateAnchor" href="#" onclick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" >End Date</a>
             <input type="text" name="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" size="15" />
@@ -55,6 +55,7 @@
             Order By Date
         </form>
     </div>
+    <div id="caldiv"></div>
     <div id="results"><%
 	RecordsQuery records = null;
 	 try {
