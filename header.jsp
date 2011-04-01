@@ -17,6 +17,6 @@
 		<span><a href="createRecord.jsp">Create Record</a></span>
 		<span><a href="uploadImage.jsp">Upload Image</a></span>
     <%}%>
-    <span style="float:right"><%=session.getAttribute("username")%></span>
+    <span style="float:right"><a href="ChangeInfo.jsp"><%=session.getAttribute("username")%></a></span>
     <br><span style="float:right"><a href="/radiologydb/Logout.jsp">Logout</a></span>
 </div>
