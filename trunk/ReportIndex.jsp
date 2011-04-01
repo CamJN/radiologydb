@@ -17,8 +17,9 @@
 <div id="content">
     <div id="contentTitle">RaySys</div>
     <div id="searchDiv">
-        <form name="userSearchForm" id="userSearchForm" action="UpdateUserSearch.jsp" method="get">
+        <form name="userSearchForm" id="userSearchForm" action="ReportSearch.jsp" method="get">
             <input name="searchInput" id="searchInput" value="" type="text"><br />
+			Year: <input type="text" name="year" id="year" value="" size="15" />
 
             <input name="searchButton" id="searchButton" type="submit" value="Search">
         </form>
