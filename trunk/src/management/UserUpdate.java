@@ -147,7 +147,7 @@ public class UserUpdate extends HttpServlet {
 	        conn.commit();
 	        conn.setAutoCommit(true);
             conn.close();
-	       // getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		} catch (SQLException ex) {
 			out.println("<p>Error occurred</p>");
