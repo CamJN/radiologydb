@@ -133,7 +133,7 @@ function getAnchorWindowPosition(anchorname) {
 
 // Functions for IE to get position of an object
 function AnchorPosition_getPageOffsetLeft (el) {
-	var ol=el.offsetLeft;
+	var ol=el.offsetLeft + el.offsetWidth;
 	while ((el=el.offsetParent) != null) { ol += el.offsetLeft; }
 	return ol;
 	}
@@ -969,7 +969,7 @@ function CalendarPopup() {
 		c = new PopupWindow();
 		c.setSize(150,175);
 		}
-	c.offsetX = -152;
+	c.offsetX = 4;
 	c.offsetY = 25;
 	c.autoHide();
 	// Calendar-specific properties
