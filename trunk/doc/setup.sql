@@ -4,13 +4,12 @@
  *              Winter Term, 2011
  *  Author:     Prof. Li-Yan Yuan
  */
-DROP SEQUENCE pic_id_sequence;
-
 DROP TABLE persons;
 DROP TABLE family_doctor;
 DROP TABLE pacs_images;
 DROP TABLE radiology_record;
 DROP TABLE users;
+
 
 CREATE TABLE users (
    user_name varchar(24),
@@ -68,5 +67,3 @@ CREATE TABLE pacs_images (
    PRIMARY KEY(record_id,image_id),
    FOREIGN KEY(record_id) REFERENCES radiology_record
 );
-
-CREATE SEQUENCE pic_id_sequence;

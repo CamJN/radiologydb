@@ -1,1 +1,0 @@
-select table_name from all_tables where owner = 'C391G1';
