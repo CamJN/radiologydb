@@ -3,7 +3,9 @@ package management;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 import util.ConnectionManager;
 
@@ -21,9 +23,18 @@ public class UserUpdate extends HttpServlet {
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-
+		
 		PrintWriter out = response.getWriter();
-				
+		
+		ArrayList<String>unames = new ArrayList<String>();
+		String temp;
+		
+		if(userClass.equals("d") || userClass.equals("p"))
+		{
+			for(int i = 0; (temp = request.getParameter("uname"+i)) != null; ++i)
+				unames.add(temp);
+		}
+		
 		ResultSet rset = null;
 		
 
@@ -64,10 +75,79 @@ public class UserUpdate extends HttpServlet {
 	        statement.setString(6, username);
 	        statement.execute();
 	        
+	        ArrayList<String> deleteUnames = new ArrayList<String>();
+	        rset.close();
+	        if(userClass.equals("d"))
+	        {
+	        	String patients = "select UNIQUE patient_name from family_doctor where doctor_name = '" + username + "'";
+	        	rset = stmt.executeQuery(patients);
+	        	int index = 0;
+	        	out.println("<p>Found:</p>");
+	        	while(rset != null && rset.next())
+	        	{
+	        		if((index = unames.indexOf(rset.getString(1))) != -1)
+	        		{
+	        			out.println("<p>" + unames.get(index) + "</p>");
+	        			unames.remove(index);
+	        		}
+	        		else
+	        		{
+	        			deleteUnames.add(rset.getString(1));
+	        		}
+	        	}
+	        	out.println("<p>remaining:</p>");
+	        	rset.close();
+	        	for(String uname: unames)
+	        	{
+	        		out.println("<p>" + uname + "</p>");
+	        		stmt.executeQuery("insert into family_doctor values('" + username + "', '" + uname + "')");
+	        	}
+	        	rset.close();
+	        	
+	        	for(String uname: deleteUnames)
+	        	{
+	        		stmt.executeQuery("delete from family_doctor where doctor_name = '" + username + "' and patient_name = '" + uname + "'");
+	        	}
+	        	
+	        }
+	        else if(userClass.equals("p"))
+	        {
+	        	String patients = "select UNIQUE doctor_name from family_doctor where patient_name = '" + username + "'";
+	        	rset = stmt.executeQuery(patients);
+	        	int index = 0;
+	        	out.println("<p>Found:</p>");
+	        	while(rset != null && rset.next())
+	        	{
+	        		if((index = unames.indexOf(rset.getString(1))) != -1)
+	        		{
+	        			out.println("<p>" + unames.get(index) + "</p>");
+	        			unames.remove(index);
+	        		}
+	        		else
+	        		{
+	        			deleteUnames.add(rset.getString(1));
+	        		}
+	        	}
+	        	rset.close();
+	        	out.println("<p>remaining:</p>");
+	        	for(String uname: unames)
+	        	{
+	        		out.println("<p>" + uname + "</p>");
+	        		out.println("<p>" + "insert into family_doctor values('" + uname + "', '" + username + "')" + "</p>");
+	        		stmt.executeQuery("insert into family_doctor values('" + uname + "', '" + username + "')");
+	        	}
+	        	
+	        	for(String uname: deleteUnames)
+	        	{
+	        		stmt.executeQuery("delete from family_doctor where doctor_name = '" + uname + "' and patient_name = '" + username + "'");
+	        	}
+	        }
+	        stmt.close();
+	        
 	        conn.commit();
 	        conn.setAutoCommit(true);
             conn.close();
-	        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+	       // getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			
 		} catch (SQLException ex) {
 			out.println("<p>Error occurred</p>");
