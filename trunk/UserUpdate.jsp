@@ -1,4 +1,7 @@
 <html>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
+<%@ page import="util.ConnectionManager"%>
+<%@ page import="java.sql.*"%>
 <%
 Connection conn = ConnectionManager.getConnection();
 Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
@@ -97,9 +100,7 @@ String updateUserName = request.getParameter("uname");
 </head>
 
 <body>
-<%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
-<%@ page import="util.ConnectionManager"%>
-<%@ page import="java.sql.*"%>
+
 
 <%@ include file="header.jsp" %>
 
