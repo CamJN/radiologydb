@@ -42,3 +42,10 @@ input#searchInput, input#searchButton {
 span .list, div#header span, div#footer span {
     margin-right:1em;
 }
+
+div#caldiv {
+	position:absolute;
+    visibility:hidden;
+    background-color:white;
+    layer-background-color:white;
+}
