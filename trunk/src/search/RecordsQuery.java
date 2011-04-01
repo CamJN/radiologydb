@@ -10,24 +10,31 @@ public class RecordsQuery {
     private Query recordsQuery;
     private PicsQuery pics;
 
-    public RecordsQuery(String searchInput) throws SQLException {
-        this(searchInput, null, null, false);
-    }
-
-    public RecordsQuery(String searchInput, boolean orderByDate) throws SQLException {
-        this(searchInput, null, null, orderByDate);
-    }
-
-    public RecordsQuery(String searchInput, String startDate, String endDate, boolean orderByDate) throws SQLException {
+    public RecordsQuery(String searchInput, String username, String userClass, String startDate, String endDate, boolean orderByDate) throws SQLException {
         if (searchInput == null || searchInput.equals("")) return;
+        if (username == null) return;
+        if (userClass == null) return;
         if (startDate != null && startDate.equals("")) startDate = null;
         if (endDate != null && endDate.equals("")) endDate = null;
+
+        String doctorname = null;
 
         String query = "SELECT (6*score(1) + 3*score(2) + score(3)) as myscore, record_id, patient_name, doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +
         " FROM radiology_record" +
         " WHERE (contains(patient_name, ?, 1) > 0 OR"+
               " contains(diagnosis, ?, 2) > 0 OR"+
               " contains(description, ?, 3) > 0)";
+        
+        if (userClass.equals("p")) {
+            query += " AND patient_name = ?";
+        } else if (userClass.equals("r")) {
+            query += " AND radiologist_name = ?";
+        } else if (userClass.equals("d")) {
+            query += " AND (doctor_name = ? OR patient_name in (SELECT patient_name FROM family_doctor WHERE doctor_name = ?))";
+            doctorname = username;
+        } else {
+            username = null;
+        }
         
         if (startDate != null) query += " AND test_date >= to_date(?, 'dd/MM/yyyy')";
         if (endDate != null) query += " AND test_date <= to_date(?, 'dd/MM/yyyy')";
@@ -36,7 +43,7 @@ public class RecordsQuery {
         else query += " ORDER BY myscore";
         
         System.out.println("QUERY: " + query);
-        recordsQuery = new Query(query, searchInput, searchInput, searchInput, startDate, endDate);
+        recordsQuery = new Query(query, searchInput, searchInput, searchInput, username, doctorname, startDate, endDate);
     }
   
     public boolean absolute(int row) throws SQLException {
