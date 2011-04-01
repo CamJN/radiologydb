@@ -37,6 +37,14 @@
 </head>
 
 <%@ include file="header.jsp" %>
+<%
+if(request.getAttribute("updateUserError") != null)
+{%>
+	<p>Invalid data please try again</p>
+	<%
+	request.setAttribute("updateUserError", null);
+}
+%>
 
 <div id="content">
     <div id="searchDiv">

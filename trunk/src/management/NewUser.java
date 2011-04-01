@@ -79,7 +79,8 @@ public class NewUser extends HttpServlet {
 			
 		} catch (SQLException ex) {
 			System.err.println("SQLException: " + ex.getMessage());
-
+			request.setAttribute("newUserError", ex.getMessage());
+			getServletContext().getRequestDispatcher("/NewUser.jsp").forward(request, response);
 		}
 		
 		

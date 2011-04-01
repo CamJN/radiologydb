@@ -9,6 +9,14 @@
 
 <body>
 <%@ include file="header.jsp" %>
+<%
+if(request.getAttribute("newUserError") != null)
+{%>
+	<p>Invalid data please try again</p>
+	<%
+	request.setAttribute("newUserError", null);
+}
+%>
 <div style="text-align:center;">
 	<form action="newUser" method="post" accept-charset="utf-8">
 		<table border="0">
