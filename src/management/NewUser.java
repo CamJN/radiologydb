@@ -6,7 +6,6 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 import util.ConnectionManager;
-import util.IndexUpdate;
 
 @SuppressWarnings("serial")
 public class NewUser extends HttpServlet {
