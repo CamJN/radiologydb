@@ -1,5 +1,5 @@
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
-<%@ page import="search.PersonsQuery"%>
+<%@ page import="search.DiagnosisQuery"%>
 <%@ page import="java.sql.SQLException"%>
 
 <%
@@ -7,10 +7,11 @@
 	int MAX_PAGELINKS = 5;
 	
     String SEARCH_INPUT = request.getParameter("searchInput");
+    String yearString = request.getParameter("year");
     if (SEARCH_INPUT == null || SEARCH_INPUT.equals("")) {
 %>      <jsp:forward page="/index.jsp"/>
 <%  }
-	
+
 	int START_INDEX = 0;
 	try {
 		START_INDEX = Integer.parseInt(request.getParameter("start"));
@@ -40,8 +41,9 @@
 
 <div id="content">
     <div id="searchDiv">
-        <form name="userSearchForm" id="userSearchForm" action="UpdateUserSearch.jsp" method="get">
+        <form name="userSearchForm" id="userSearchForm" action="ReportSearch.jsp" method="get">
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>">
+             Year:<input type="text" name="year" id="year" value="<%=yearString%>" size="15" />
             <input name="searchButton" id="searchButton" type="submit" value="Search">
             <br />
         </form>
@@ -49,28 +51,35 @@
     </div>
     <div id="results">
          <%
-             PersonsQuery persons = null;
+         	int year;
+         	try{
+         		year = Integer.parseInt(yearString.trim());
+         	}
+         	catch(NumberFormatException e)
+         	{
+         		year = 0;
+         	}
+         
+             DiagnosisQuery diagnosis = null;
 		     try {
-				 persons = new PersonsQuery(SEARCH_INPUT);
-				 int personCount = persons.getPersonCount();
+				 diagnosis = new DiagnosisQuery(SEARCH_INPUT, year);
+				 int personCount = diagnosis.getPersonCount();
 				 
-				 if (persons.absolute(START_INDEX)) {
+				 if (diagnosis.absolute(START_INDEX)) {
 					 out.println("<table id=\"resultsTable\">");
-					 out.println("<tr><th>User Name</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Email</th><th>Phone</th></tr>");
+					 out.println("<tr><th>User Name</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th>Date</th></tr>");
 					 int index = 1;
 					 do {
 						out.println("<tr class=\"recordRow\">");
-						out.println("<td id=\"colUserName\" class=\"recordColumn\">" + persons.getUname() + "</td>");
-						out.println("<td id=\"colFirstName\" class=\"recordColumn\">" + persons.getFname() + "</td>");
-						out.println("<td id=\"colLastName\" class=\"recordColumn\">" + persons.getLname() + "</td>");
-						out.println("<td id=\"colAddress\" class=\"recordColumn\">" + persons.getAddress() + "</td>");
-						out.println("<td id=\"colEmail\" class=\"recordColumn\">" + persons.getEmail() + "</td>");
-						out.println("<td id=\"colPhone\" class=\"recordColumn\">" + persons.getPhone() + "</td>");
-						out.println("<td id=\"colEdit\" class=\"recordColumn\"> <A HREF=UserUpdate.jsp?uname=" + persons.getUname() + "> Edit <A/></td>");
-                        
+						out.println("<td id=\"colUserName\" class=\"recordColumn\">" + diagnosis.getUname() + "</td>");
+						out.println("<td id=\"colFirstName\" class=\"recordColumn\">" + diagnosis.getFname() + "</td>");
+						out.println("<td id=\"colLastName\" class=\"recordColumn\">" + diagnosis.getLname() + "</td>");
+						out.println("<td id=\"colAddress\" class=\"recordColumn\">" + diagnosis.getAddress() + "</td>");
+						out.println("<td id=\"colPhone\" class=\"recordColumn\">" + diagnosis.getPhone() + "</td>");
+						out.println("<td id=\"colDate\" class=\"recordColumn\">" + diagnosis.getDate() + "</td>");
                         out.println("</tr>");
 						index++;
-					 } while (persons.nextRecord() && index <= MAX_RESULTS );
+					 } while (diagnosis.nextRecord() && index <= MAX_RESULTS );
 					 out.println("</table>");
 					 
 					 
@@ -89,12 +98,12 @@
 					 out.println("<span>Showing results "+ (START_INDEX) + " to " + (index+START_INDEX-2) + " of " + personCount + " results</span>");
 					 out.println("</div>");
 				 } else {
-				     out.println("No persons containing your search terms were found.");
+				     out.println("No diagnosis containing your search terms were found.");
 				 }
 			 } catch (SQLException e) {
-				 out.println("No persons containing your search terms were found.");
+				 out.println("No diagnosis containing your search terms were found.");
 			 } finally {
-				 if (persons != null) persons.close();
+				 if (diagnosis != null) diagnosis.close();
 			 }
 		 %>
     </div>

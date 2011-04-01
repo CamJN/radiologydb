@@ -13,6 +13,7 @@
     <%}	if(userClass.equals("a")){%>
     		<span><a href="NewUser.jsp">Add User</a></span>
     		<span><a href="UserSearchIndex.jsp">Update User</a></span>
+    		<span><a href="ReportIndex.jsp">User Report</a></span>
     <%} else if(userClass.equals("r")){%>
 		<span><a href="createRecord.jsp">Create Record</a></span>
 		<span><a href="uploadImage.jsp">Upload Image</a></span>
