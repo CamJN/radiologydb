@@ -38,7 +38,7 @@ public class PicsQuery {
     }
     
     private String getImageURL(String recordID, String imageID, String style) {       
-        return "/radiologydb/servlet/GetOnePic?image_id="+imageID+"&record_id="+recordID+"&style="+style;
+        return "/radiologydb/GetOnePic?image_id="+imageID+"&record_id="+recordID+"&style="+style;
     }
 
     public String[] getThumbnailURLs() {
