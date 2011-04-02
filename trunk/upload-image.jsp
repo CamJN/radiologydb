@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="default.css" /> 
+    <link rel="stylesheet" type="text/css" href="css/default.css" /> 
     <style type="text/css">
       th {text-align:right}
       td {text-align:left}
@@ -12,7 +12,7 @@
   <body>
     <h1><%= (null!=request.getParameter("state"))? request.getParameter("state") : ' ' %></h1>
       <h1>Please input or select the path of an image!</h1>
-      <form name="upload-image" method="POST" enctype="multipart/form-data" action="servlet/UploadImage">
+      <form name="upload-image" method="POST" enctype="multipart/form-data" action="UploadImage">
 	<table align="center">
 	  <tr>
 	    <th>File path:</th>

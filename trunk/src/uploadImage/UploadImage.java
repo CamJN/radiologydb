@@ -101,7 +101,7 @@ public class UploadImage extends HttpServlet {
 	    out.println("<!DOCTYPE html>\n"+
 			"<html>\n"+
 			"<head>\n"+
-			"<meta http-equiv=\"refresh\" content=\"0;url='../upload_image.jsp?state=Image+Uploaded!\'\">\n"+
+			"<meta http-equiv=\"refresh\" content=\"0;url='upload_image.jsp?state=Image+Uploaded!\'\">\n"+
 			"</head>\n"+
 			"</html>");
 	}else{

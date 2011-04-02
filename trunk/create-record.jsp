@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<!DOCTYPE html>
+<html>
   <head>
-    <link rel="stylesheet" type="text/css" href="default.css" />
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
     <style type="text/css">
       th {text-align:right}
       input, textarea {width:250px}
     </style>
-    <script language="JavaScript" src="CalendarPopup.js"></script>
+    <script language="JavaScript" src="js/CalendarPopup.js"></script>
     <script language="JavaScript">document.write(getCalendarStyles());</script>
     <script language="JavaScript">var cal = new CalendarPopup("caldiv");</SCRIPT>
 
@@ -14,7 +14,7 @@
   </head>
   <%@ include file="header.jsp" %>
   <body> 
-    <form name="create-record" method="POST" enctype="multipart/form-data" action="servlet/CreateRecord">
+    <form name="create-record" method="POST" enctype="multipart/form-data" action="CreateRecord">
       <h1>Please enter record data!</h1>
       <table align=center>
 	<tr>  
