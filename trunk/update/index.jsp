@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="default.css" />
-    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
     <title>RaySys</title>
 
     <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>

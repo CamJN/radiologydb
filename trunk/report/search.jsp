@@ -30,10 +30,9 @@
 %>
 
 <head>
-	<%@ include file="header.html" %>
-    <link rel="stylesheet" type="text/css" href="search.css" />
-    <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
-    <script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/search.css" />
+    <script language="JavaScript" type="text/javascript" src="../js/contentflow.js" load="DEFAULT"></script>
+    <script language="JavaScript" src="../js/CalendarPopup.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
     <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
 </head>

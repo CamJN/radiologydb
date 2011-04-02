@@ -25,9 +25,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
 
-    <link rel="stylesheet" type="text/css" href="default.css" />
-    <link rel="stylesheet" type="text/css" href="search.css" />
-    <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/search.css" />
+    <script language="JavaScript" type="text/javascript" src="../js/contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" src="CalendarPopup.js"></script>
     <script language="JavaScript">document.write(getCalendarStyles());</script>
     <script language="JavaScript">
