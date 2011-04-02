@@ -57,5 +57,6 @@ if(request.getAttribute("newUserError") != null)
 	<p><input type="submit" value="Add User"></p>
 	</form>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

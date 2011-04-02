@@ -153,7 +153,7 @@ public class UserUpdate extends HttpServlet {
 			System.err.println("SQLException: " + ex.getMessage());
 			
 			request.setAttribute("updateUserError", ex.getMessage());
-			getServletContext().getRequestDispatcher("/UserUpdate.jsp?uname="+ username).forward(request, response);
+			getServletContext().getRequestDispatcher("/update/update.jsp?uname="+ username).forward(request, response);
 		}
 		
 		

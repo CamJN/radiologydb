@@ -17,7 +17,7 @@
     String SEARCH_INPUT = request.getParameter("searchInput");
     if (SEARCH_INPUT == null || SEARCH_INPUT.equals("")) {
 %>
-    <jsp:forward page="/index.jsp"/>
+    <jsp:forward page="/radiologydb/index.jsp"/>
 <%  }
 
 	int START_INDEX = 0;
@@ -30,6 +30,7 @@
 %>
 
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/default.css" />
     <link rel="stylesheet" type="text/css" href="../css/search.css" />
     <script language="JavaScript" type="text/javascript" src="../js/contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" src="../js/CalendarPopup.js" type="text/javascript"></script>
@@ -38,11 +39,11 @@
 </head>
 
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="../nav.jsp" %>
 
 <div id="content">
     <div id="searchDiv">
-        <form name="searchForm" id="searchForm" action="ReportSearch.jsp" method="get">
+        <form name="searchForm" id="searchForm" action="search.jsp" method="get">
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>" />
             <input name="searchButton" id="searchButton" type="submit" value="Search" />
             <br />
@@ -105,9 +106,7 @@
 
 </div>
 
-<div id="footer">
-    <span><a href="about">About RaySys</a>
-</div>
+<%@ include file="../footer.jsp" %>
 
 </body>
 

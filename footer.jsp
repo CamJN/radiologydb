@@ -1,3 +1,3 @@
 <div id="footer">
-    <span><a href="about.jsp">About RaySys</a>
+    <span><a href="/radiologydb/about.jsp">About RaySys</a>
 </div>

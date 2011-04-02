@@ -103,10 +103,10 @@ String updateUserName = request.getParameter("uname");
 <body>
 
 
-<%@ include file="header.jsp" %>
+<%@ include file="../nav.jsp" %>
 
 <div style="text-align:center">
-	<form name = "userUpdate" action="userUpdate" method="post" accept-charset="utf-8">
+	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8">
 		<table border="0">
 			<tr><th>Update User</th></tr>
 			<tr><th>Please update where needed</th></tr>
@@ -250,5 +250,6 @@ String updateUserName = request.getParameter("uname");
 	<center><p><input type="button" value="Update" onClick="saveMe();"></p></center>
 
 <%conn.close();%>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
