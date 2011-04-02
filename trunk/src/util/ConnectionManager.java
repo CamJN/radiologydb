@@ -46,8 +46,6 @@ public class ConnectionManager {
         
         public ConnectionKit(boolean autoCommit) throws SQLException {
             connection = ConnectionManager.getConnection();
-            connection.setAutoCommit(autoCommit);
-            
             statements = new ArrayList<Statement>();
         }
         
@@ -77,6 +75,16 @@ public class ConnectionManager {
         public void close() throws SQLException {
             for (Statement s : statements) s.close();
             connection.close();
+        }
+
+        public static int getRowCount(ResultSet resultSet) throws SQLException {
+            int initialRow = resultSet.getRow();
+            resultSet.last();
+            int lastRow = resultSet.getRow();
+            if (initialRow != 0) resultSet.absolute(initialRow);
+            else resultSet.beforeFirst();
+            
+            return lastRow;
         }
 
     }
