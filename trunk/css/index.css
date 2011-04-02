@@ -1,0 +1,19 @@
+div#contentTitle {
+	margin-top:1em;
+	font-size:5em;
+	font-weight:bold;
+	text-align:center;
+}
+
+div#searchDiv {
+	margin:2em;
+	text-align:center;
+}
+
+input#searchInput {
+	width:40%;
+}
+
+input#searchButton {
+	margin-top:0.5em;
+}
