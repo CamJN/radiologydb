@@ -4,6 +4,7 @@
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 <%@ page import="search.RecordsQuery"%>
 <%@ page import="java.sql.SQLException"%>
+
 <%
 	String USER_NAME = (String)session.getAttribute("username");
 	String USER_CLASS = (String)session.getAttribute("class");
@@ -31,9 +32,9 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="css/default.css">
-    <link rel="stylesheet" type="text/css" href="search.css" />
-    <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
-    <script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/search.css" />
+    <script language="JavaScript" type="text/javascript" src="js/contentflow.js" load="DEFAULT"></script>
+    <script language="JavaScript" type="text/javascript" src="js/CalendarPopup.js"></script>
     <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
     <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
     <title>Search Records</title>
@@ -43,6 +44,8 @@
 <%@ include file="nav.jsp" %>
 
 <div id="content">
+    <div id="contentTitle">RaySys</div>
+    <div id="contentSub">Search Records</div>
     <div id="searchDiv">
         <form name="searchForm" id="searchForm" action="search.jsp" method="get">
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>" />

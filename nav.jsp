@@ -9,7 +9,7 @@
 		}
     	
     	if(!(userClass.equals("a") || userClass.equals("p") || userClass.equals("r") || userClass.equals("d"))){%>
-    		<jsp:forward page="/Login.jsp"/>
+    		<jsp:forward page="/login.jsp"/>
     <%}	if(userClass.equals("a")){%>
     		<span><a href="new-user.jsp">Add User</a></span>
     		<span><a href="update/index.jsp">Update User</a></span>
