@@ -40,7 +40,9 @@ public class LoginModule extends HttpServlet {
 				truepwd = (rset.getString(1)).trim();
 				userClass = rset.getString(2).trim();
 			}
-
+			
+			rset.close();
+			stmt.close();
             conn.close();
 			// display the result
 			if (password.equals(truepwd))

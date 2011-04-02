@@ -71,7 +71,8 @@ public class NewUser extends HttpServlet {
 	        statement.setString(6, phone);
 	        statement.execute();
 	        
-	        
+	        rset.close();
+	        stmt.close();
 	        conn.commit();
 	        conn.setAutoCommit(true);
             conn.close();

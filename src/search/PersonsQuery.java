@@ -3,11 +3,12 @@ package search;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import util.Query;
+import util.ConnectionManager.ConnectionKit;
 
 public class PersonsQuery {
 
-    private Query personsQuery;
+	protected ResultSet resultSet;
+	private ConnectionKit connectionKit;
 
     public PersonsQuery(String searchInput) throws SQLException {
         if (searchInput == null || searchInput.equals("")) return;
@@ -21,53 +22,64 @@ public class PersonsQuery {
            
         query += " ORDER BY myscore";
         
-        personsQuery = new Query(query, ResultSet.TYPE_SCROLL_INSENSITIVE);
+        connectionKit = new ConnectionKit();
+        resultSet = connectionKit.exec(query, ResultSet.TYPE_SCROLL_INSENSITIVE);
     }
     
     public boolean absolute(int row) throws SQLException {
-        if (personsQuery.absolute(row)) {
+        if (resultSet.absolute(row)) {
             return true;
         }
         return false;
     }
 
     public int getPersonCount() throws SQLException {
-        return personsQuery.getRowCount();
+        return getRowCount();
     }
 
     public boolean nextRecord() throws SQLException {
-        if (personsQuery.next()) {
+        if (resultSet.next()) {
             return true;
         }
         return false;
     }
 
     public String getUname() throws SQLException {
-        return personsQuery.getString(2);
+        return resultSet.getString(2);
     }
     
     public String getFname() throws SQLException {
-        return personsQuery.getString(3);
+        return resultSet.getString(3);
     }
     
     public String getLname() throws SQLException {
-        return personsQuery.getString(4);
+        return resultSet.getString(4);
     }
 
     public String getAddress() throws SQLException {
-        return personsQuery.getString(5);
+        return resultSet.getString(5);
     }
     
     public String getEmail() throws SQLException {
-        return personsQuery.getString(6);
+        return resultSet.getString(6);
     }
     
     public String getPhone() throws SQLException {
-        return personsQuery.getString(7);
+        return resultSet.getString(7);
     }
 
     public void close() throws SQLException {
-        personsQuery.close();
+        resultSet.close();
+    }
+    
+    public int getRowCount() throws SQLException {
+        int initialRow = resultSet.getRow();
+        resultSet.last();
+        int lastRow = resultSet.getRow();
+        if (initialRow != 0) resultSet.absolute(initialRow);
+        else resultSet.beforeFirst();
+        
+        return lastRow;
     }
 
 }
