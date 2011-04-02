@@ -981,7 +981,7 @@ function CalendarPopup() {
 	c.returnQuarterFunction = "CP_tmpReturnQuarterFunction";
 	c.returnYearFunction = "CP_tmpReturnYearFunction";
 	c.weekStartDay = 0;
-	c.isShowYearNavigation = false;
+	c.isShowYearNavigation = true;
 	c.displayType = "date";
 	c.disabledWeekDays = new Object();
 	c.disabledDatesExpression = "";
@@ -990,10 +990,10 @@ function CalendarPopup() {
 	c.todayText="Today";
 	c.cssPrefix="";
 	c.isShowNavigationDropdowns=false;
-	c.isShowYearNavigationInput=false;
+	c.isShowYearNavigationInput=true;
 	window.CP_calendarObject = null;
 	window.CP_targetInput = null;
-	window.CP_dateFormat = "MM/dd/yyyy";
+	window.CP_dateFormat = "dd/MM/yyyy";
 	// Method mappings
 	c.copyMonthNamesToWindow = CP_copyMonthNamesToWindow;
 	c.setReturnFunction = CP_setReturnFunction;
