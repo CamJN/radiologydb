@@ -9,6 +9,7 @@ DROP INDEX fname_index;
 DROP INDEX lname_index;
 
 CREATE SEQUENCE pic_id_sequence;
+CREATE SEQUENCE rec_id_sequence;
 
 CREATE INDEX radioname_index ON radiology_record(patient_name) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ('SYNC ( ON COMMIT)');
 CREATE INDEX radiodiag_index ON radiology_record(diagnosis) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS ('SYNC ( ON COMMIT)');

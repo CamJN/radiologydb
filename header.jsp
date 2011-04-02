@@ -15,8 +15,8 @@
     		<span><a href="UserSearchIndex.jsp">Update User</a></span>
     		<span><a href="ReportIndex.jsp">User Report</a></span>
     <%} else if(userClass.equals("r")){%>
-		<span><a href="createRecord.jsp">Create Record</a></span>
-		<span><a href="uploadImage.jsp">Upload Image</a></span>
+		<span><a href="create_record.jsp">Create Record</a></span>
+		<span><a href="upload_image.jsp">Upload Image</a></span>
     <%}%>
     <span style="float:right"><a href="ChangeInfo.jsp"><%=session.getAttribute("username")%></a></span>
     <br><span style="float:right"><a href="/radiologydb/Logout.jsp">Logout</a></span>
