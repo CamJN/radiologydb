@@ -35,7 +35,7 @@ version="2.4">
 
 	    <servlet>
                 <servlet-name>UploadImage</servlet-name>
-                <servlet-class>UploadImage</servlet-class>
+                <servlet-class>uploadImage.UploadImage</servlet-class>
             </servlet>
             <servlet-mapping>
                 <servlet-name>UploadImage</servlet-name>
@@ -53,7 +53,7 @@ version="2.4">
 
 	    <servlet>
                 <servlet-name>CreateRecord</servlet-name>
-                <servlet-class>CreateRecord</servlet-class>
+                <servlet-class>createRecord.CreateRecord</servlet-class>
             </servlet>
             <servlet-mapping>
                 <servlet-name>CreateRecord</servlet-name>
