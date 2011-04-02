@@ -111,7 +111,7 @@ public class CreateRecord extends HttpServlet {
 	    out.println("<!DOCTYPE html>\n"+
 			"<html>\n"+
 			"<head>\n"+
-			"<meta http-equiv=\"refresh\" content=\"0;url='upload_image.jsp?record_id="+record_id+"&state=Record+Created!'\">\n"+
+			"<meta http-equiv=\"refresh\" content=\"0;url='upload-image.jsp?record_id="+record_id+"&state=Record+Created!'\">\n"+
 			"</head>\n"+
 			"</html>");
 	}else{
