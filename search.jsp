@@ -30,16 +30,17 @@
 %>
 
 <head>
-	<%@ include file="header.html" %>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" type="text/css" href="search.css" />
     <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
     <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
+    <title>Search Records</title>
 </head>
 
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="nav.jsp" %>
 
 <div id="content">
     <div id="searchDiv">
