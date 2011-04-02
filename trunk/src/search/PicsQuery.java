@@ -3,9 +3,10 @@ package search;
 import java.util.List;
 import java.util.LinkedList;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import util.Query;
+import util.ConnectionManager.ConnectionKit;
 
 public class PicsQuery {
     
@@ -14,7 +15,8 @@ public class PicsQuery {
     private List<String> fullsizeURLs;
     
     public PicsQuery(String recordID) throws SQLException {
-        Query q = new Query(
+        ConnectionKit connectionKit = new ConnectionKit();
+        ResultSet images = connectionKit.exec(
             "SELECT image_id" +
            " FROM pacs_images"+
            " WHERE record_id = '" + recordID + "'"+
@@ -25,16 +27,17 @@ public class PicsQuery {
         regularsizeURLs = new LinkedList<String>();
         fullsizeURLs = new LinkedList<String>();
 
-        while (q.next()) {
-            thumbnailURLs.add(getImageURL(recordID, q.getString(1), "thumbnail"));
-            regularsizeURLs.add(getImageURL(recordID, q.getString(1), "regular_size"));
-            fullsizeURLs.add(getImageURL(recordID, q.getString(1), "full_size"));
+        while (images.next()) {
+            String imageID = images.getString(1);
+            thumbnailURLs.add(getImageURL(recordID, imageID, "thumbnail"));
+            regularsizeURLs.add(getImageURL(recordID, imageID, "regular_size"));
+            fullsizeURLs.add(getImageURL(recordID, imageID, "full_size"));
         }
         
-        q.close();
+        connectionKit.close();
     }
     
-    private String getImageURL(String recordID, String imageID, String style) {
+    private String getImageURL(String recordID, String imageID, String style) {       
         return "/radiologydb/servlet/GetOnePic?image_id="+imageID+"&record_id="+recordID+"&style="+style;
     }
 

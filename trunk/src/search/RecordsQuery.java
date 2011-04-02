@@ -1,21 +1,25 @@
 package search;
 
+
 import java.sql.SQLException;
 
-import util.Query;
+import util.ConnectionManager.ConnectionKit;
 
 public class RecordsQuery {
 
-    private Query recordsQuery;
+    private ConnectionKit connectionKit;
+    private ResultSet results;
     private PicsQuery pics;
 
     public RecordsQuery(String searchInput, String username, String userClass, String startDate, String endDate, boolean orderByDate) throws SQLException {
         if (searchInput == null || searchInput.equals("")) return;
         if (username == null) return;
         if (userClass == null) return;
+
+        connectionKit = new ConnectionKit();
+        
         if (startDate != null && startDate.equals("")) startDate = null;
         if (endDate != null && endDate.equals("")) endDate = null;
-
         String doctorname = null;
 
         String query = "SELECT (6*score(1) + 3*score(2) + score(3)) as myscore, record_id, patient_name, doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +
@@ -41,12 +45,11 @@ public class RecordsQuery {
         if (orderByDate) query += " ORDER BY test_date";
         else query += " ORDER BY myscore";
         
-        System.out.println("QUERY: " + query);
-        recordsQuery = new Query(query, searchInput, searchInput, searchInput, username, doctorname, startDate, endDate);
+        results = connectionKit.exec(query, searchInput, searchInput, searchInput, username, doctorname, startDate, endDate);
     }
   
     public boolean absolute(int row) throws SQLException {
-        if (recordsQuery.absolute(row)) {
+        if (results.absolute(row)) {
             pics = new PicsQuery(getRecordID());
             return true;
         }
@@ -54,11 +57,11 @@ public class RecordsQuery {
     }
 
     public int getRecordCount() throws SQLException {
-        return recordsQuery.getRowCount();
+        return ConnectionKit.getRowCount(results);
     }
 
     public boolean nextRecord() throws SQLException {
-        if (recordsQuery.next()) {
+        if (results.next()) {
             pics = new PicsQuery(getRecordID());
             return true;
         }
@@ -66,39 +69,39 @@ public class RecordsQuery {
     }
 
     public String getRecordID() throws SQLException {
-        return recordsQuery.getString(2);
+        return results.getString(2);
     }
     
     public String getPatientName() throws SQLException {
-        return recordsQuery.getString(3);
+        return results.getString(3);
     }
     
     public String getDoctorName() throws SQLException {
-        return recordsQuery.getString(4);
+        return results.getString(4);
     }
 
     public String getRadiologistName() throws SQLException {
-        return recordsQuery.getString(5);
+        return results.getString(5);
     }
     
     public String getTestType() throws SQLException {
-        return recordsQuery.getString(6);
+        return results.getString(6);
     }
     
     public String getPrescribingDate() throws SQLException {
-        return recordsQuery.getString(7);
+        return results.getString(7);
     }
     
     public String getTestDate() throws SQLException {
-        return recordsQuery.getString(8);
+        return results.getString(8);
     }
     
     public String getDiagnosis() throws SQLException {
-        return recordsQuery.getString(9);
+        return results.getString(9);
     }
     
     public String getDescription() throws SQLException {
-        return recordsQuery.getString(10);
+        return results.getString(10);
     }
     
     public String[] getThumbnailURLs() {
@@ -114,7 +117,7 @@ public class RecordsQuery {
     }
     
     public void close() throws SQLException {
-        recordsQuery.close();
+        connectionKit.close();
     }
 
 }

@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 <%@ page import="util.ConnectionManager"%>
@@ -104,7 +105,7 @@ String updateUserName = request.getParameter("uname");
 
 <%@ include file="header.jsp" %>
 
-
+<div style="text-align:center">
 	<form name = "userUpdate" action="userUpdate" method="post" accept-charset="utf-8">
 		<table border="0">
 			<tr><th>Update User</th></tr>
@@ -144,7 +145,7 @@ String updateUserName = request.getParameter("uname");
 			</tr>
 		</table>
 	</form>
-
+</div>
 	<%
 	if(updateUserClass.equals("p")){
 	
@@ -159,7 +160,7 @@ String updateUserName = request.getParameter("uname");
         <td valign="top" width=175>
         Doctors:
         <br>
-        <select name="Doctors" size=10 onchange="moveOver();">
+        <select name="Doctors" size=10 onChange="moveOver();">
         <%
         while (rset != null && rset.next())
 		{
@@ -190,7 +191,7 @@ String updateUserName = request.getParameter("uname");
         <tr>
         <td></td>
         <td colspan=2 height=10>
-        <input type="button" value="Remove" onclick="removeMe();">
+        <input type="button" value="Remove" onClick="removeMe();">
         </td>
         </tr>
         </table>
@@ -208,7 +209,7 @@ String updateUserName = request.getParameter("uname");
         <td valign="top" width=175>
         Patients:
         <br>
-        <select name="Doctors" size=10 onchange="moveOver();">
+        <select name="Doctors" size=10 onChange="moveOver();">
 	        <%
 	        while (rset != null && rset.next())
 			{
@@ -239,14 +240,14 @@ String updateUserName = request.getParameter("uname");
         <tr>
         <td></td>
         <td colspan=2 height=10>
-        <input type="button" value="Remove" onclick="removeMe();">
+        <input type="button" value="Remove" onClick="removeMe();">
         </td>
         </tr>
         </table>
     </form>
 	</center>
 	<%}%>
-	<center><p><input type="button" value="Update" onclick="saveMe();"></p></center>
+	<center><p><input type="button" value="Update" onClick="saveMe();"></p></center>
 
 <%conn.close();%>
 </body>
