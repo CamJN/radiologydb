@@ -36,7 +36,7 @@
     <title>RaySys</title>
 </head>
 
-<%@ include file="header.jsp" %>
+<%@ include file="../nav.jsp" %>
 <%
 if(request.getAttribute("updateUserError") != null)
 {%>
