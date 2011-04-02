@@ -33,7 +33,7 @@ public class PersonsQuery {
     }
 
     public int getPersonCount() throws SQLException {
-        return getRowCount();
+    	return ConnectionKit.getRowCount(resultSet);
     }
 
     public boolean nextRecord() throws SQLException {
@@ -70,15 +70,4 @@ public class PersonsQuery {
     public void close() throws SQLException {
         resultSet.close();
     }
-    
-    public int getRowCount() throws SQLException {
-        int initialRow = resultSet.getRow();
-        resultSet.last();
-        int lastRow = resultSet.getRow();
-        if (initialRow != 0) resultSet.absolute(initialRow);
-        else resultSet.beforeFirst();
-        
-        return lastRow;
-    }
-
 }
