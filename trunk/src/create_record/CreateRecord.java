@@ -6,20 +6,15 @@ import java.sql.Date;
 import java.util.*;
 import oracle.sql.*;
 import oracle.jdbc.*;
-
+import util.ConnectionManager;
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 
 public class CreateRecord extends HttpServlet {
     public String response_message;
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-	//  change the following parameters to connect to the oracle database
-	String username = "c391g1";
-	String password = "c3911337";
-	String drivername = "oracle.jdbc.driver.OracleDriver";
-	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 
-	String record_id="";
+	int record_id=-1;
 	String patient_name="";
 	String doctor_name="";
 	String radiologist_name="";
@@ -35,9 +30,7 @@ public class CreateRecord extends HttpServlet {
 	    FileItem item;
 	    int inti=0;
 	    for (item = (FileItem) i.next(); i.hasNext(); item=(FileItem)i.next()) {
-		if(item.getFieldName().equals("record_id")){
-		    record_id=new String(item.get());
-		}else if(item.getFieldName().equals("patient_name")){
+		if(item.getFieldName().equals("patient_name")){
 		    patient_name=new String(item.get());
 		}else if(item.getFieldName().equals("doctor_name")){
 		    doctor_name=new String(item.get());
@@ -56,30 +49,37 @@ public class CreateRecord extends HttpServlet {
 		}
 	    }
 	    //run one more time for the last item 
-		if(item.getFieldName().equals("record_id")){
-		    record_id=new String(item.get());
-		}else if(item.getFieldName().equals("patient_name")){
-		    patient_name=new String(item.get());
-		}else if(item.getFieldName().equals("doctor_name")){
-		    doctor_name=new String(item.get());
-		}else if(item.getFieldName().equals("radiologist_name")){
-		    radiologist_name=new String(item.get());
-		}else if(item.getFieldName().equals("test_type")){
-		    test_type=new String(item.get());
-		}else if(item.getFieldName().equals("prescribing_date")){
-		    prescribing_date=new String(item.get());
-		}else if(item.getFieldName().equals("test_date")){
-		    test_date=new String(item.get());
-		}else if(item.getFieldName().equals("diagnosis")){
-		    diagnosis=new String(item.get());
-		}else if(item.getFieldName().equals("description")){
-		    description=new String(item.get());
-		}
+	    if(item.getFieldName().equals("patient_name")){
+		patient_name=new String(item.get());
+	    }else if(item.getFieldName().equals("doctor_name")){
+		doctor_name=new String(item.get());
+	    }else if(item.getFieldName().equals("radiologist_name")){
+		radiologist_name=new String(item.get());
+	    }else if(item.getFieldName().equals("test_type")){
+		test_type=new String(item.get());
+	    }else if(item.getFieldName().equals("prescribing_date")){
+		prescribing_date=new String(item.get());
+	    }else if(item.getFieldName().equals("test_date")){
+		test_date=new String(item.get());
+	    }else if(item.getFieldName().equals("diagnosis")){
+		diagnosis=new String(item.get());
+	    }else if(item.getFieldName().equals("description")){
+		description=new String(item.get());
+	    }
 
             // Connect to the database and create a statement
-            Connection conn = getConnected(drivername,dbstring, username,password);
+            Connection conn = ConnectionManager.getConnection();
+	    /*
+	     *  First, to generate a unique rec_id using an SQL sequence
+	     */
+    	    Statement s_stmt = conn.createStatement();
+	    ResultSet rset1 = s_stmt.executeQuery("SELECT rec_id_sequence.nextval from dual");
+	    rset1.next();
+	    record_id = rset1.getInt(1);
+	    
+
 	    PreparedStatement stmt = conn.prepareStatement( "insert into radiology_record(record_id,patient_name,doctor_name,radiologist_name,test_type,prescribing_date,test_date,diagnosis,description) values (?,?,?, ?,?,?, ?,?,?)");
-	    stmt.setInt(1,(new Integer(record_id)).intValue());
+	    stmt.setInt(1,record_id);
 	    stmt.setString(2,patient_name);
 	    stmt.setString(3,doctor_name);
 	    stmt.setString(4,radiologist_name);
@@ -89,13 +89,16 @@ public class CreateRecord extends HttpServlet {
 	    stmt.setString(8,diagnosis);
 	    stmt.setString(9,description);
 	    stmt.executeUpdate();
-	    System.out.println( "insert into radiology_record(record_id, patient_name, doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description) values ("+(new Integer(record_id)).intValue()+","+patient_name+","+doctor_name+","+radiologist_name+","+test_type+","+Date.valueOf(prescribing_date)+","+Date.valueOf(test_date)+","+diagnosis+","+description+")");
+
             conn.commit();
-	    response_message = " Create OK!  ";
+	    response_message = "Create OK!";
+	    
+	    s_stmt.close();
+	    rset1.close();
+	    stmt.close();
             conn.close();
 
 	} catch( Exception ex ) {
-	    //System.out.println( ex.getMessage());
 	    response_message = ex.getMessage();
 	}
 
@@ -103,27 +106,25 @@ public class CreateRecord extends HttpServlet {
 	response.setContentType("text/html");
 	PrintWriter out = response.getWriter();
 	//include here a redirect to upload_image or just got there directly
-	out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
-		    "Transitional//EN\">\n" +
-		    "<HTML>\n" +
-		    "<meta http-equiv=\"refresh\" content=\"2;url=\"../upload_image.html\"\">\n"+
-		    "<HEAD><TITLE>Create Message</TITLE></HEAD>\n" +
-		    "<BODY>\n" +
-		    "<H1>" +
-		            response_message +
-		    "</H1>\n" +
-		    "</BODY></HTML>");
+	if(response_message.equals("Create OK!")){
+	    out.println("<!DOCTYPE html>\n"+
+			"<html>\n"+
+			"<head>\n"+
+			"<meta http-equiv=\"refresh\" content=\"0;url='../upload_image.jsp?record_id="+record_id+"&state=Record+Created!'\">\n"+
+			"</head>\n"+
+			"</html>");
+	}else{
+	    out.println("<!DOCTYPE html>\n"+
+			"<html>\n"+
+			"<head>\n"+
+			"<script type=\"text/javascript\">\n"+
+			"window.setTimeout(\"history.back(1)\", 5000);\n"+
+			"</script>\n"+
+			"</head>\n"+
+			"<body>\n"+
+			"<h1>"+response_message.trim()+"</h1>\n"+	
+			"</body>\n"+
+			"</html>");
+	}
     }
-
-    /*
-     *   To connect to the specified database
-     */
-    private static Connection getConnected( String drivername,
-					    String dbstring,
-					    String username, 
-					    String password) throws Exception {
-	Class drvClass = Class.forName(drivername); 
-	DriverManager.registerDriver((Driver) drvClass.newInstance());
-	return( DriverManager.getConnection(dbstring,username,password));
-    } 
 }

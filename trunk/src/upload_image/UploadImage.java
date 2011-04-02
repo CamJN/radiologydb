@@ -9,7 +9,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import javax.imageio.ImageIO;
-
+import util.ConnectionManager;
 import org.apache.commons.fileupload.DiskFileUpload;
 import org.apache.commons.fileupload.FileItem;
 
@@ -17,13 +17,7 @@ public class UploadImage extends HttpServlet {
     public String response_message;
 
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-	//  change the following parameters to connect to the oracle database
-	String username = "c391g1";
-	String password = "c3911337";
-	String drivername = "oracle.jdbc.driver.OracleDriver";
-	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 	int pic_id;
-
 	String record_id="";
 
 	try {
@@ -34,36 +28,27 @@ public class UploadImage extends HttpServlet {
 	    Iterator i = FileItems.iterator();
 	    FileItem item;
 	    InputStream instream=null;
-	    //int record_id=3;
-	    System.out.println(FileItems.size());
 	    int inti=0;
 	    for (item = (FileItem) i.next(); instream==null || record_id.equals(""); item=(FileItem)i.next()) {
-		System.out.println(++inti);
 		if(item.isFormField()){
 		    if(item.getFieldName().equals("record_id")){
 			record_id=new String(item.get());
-			System.out.println("record_id"+record_id);
 		    }
 		}else{
-		    System.out.println("set instream");
 		    instream = item.getInputStream();
 		}
 		//get record_id from form
 	    }
 	    //Get the image stream
-
-
 	    BufferedImage img = ImageIO.read(instream);
 	    BufferedImage thumbNail = shrink(img, 150);
 	    BufferedImage normalSize = shrink(img,550);
 
             // Connect to the database and create a statement
-            Connection conn = getConnected(drivername,dbstring, username,password);
+            Connection conn = ConnectionManager.getConnection();
 	    Statement stmt = conn.createStatement();
 	    
-	    /*
-	     *  First, to generate a unique pic_id using an SQL sequence
-	     */
+	    //  First, to generate a unique pic_id using an SQL sequence
 	    ResultSet rset1 = stmt.executeQuery("SELECT pic_id_sequence.nextval from dual");
 	    rset1.next();
 	    pic_id = rset1.getInt(1);
@@ -85,17 +70,12 @@ public class UploadImage extends HttpServlet {
 	    //Write the image to the blob object
 	    OutputStream thumb_outstream = thumbBlob.getBinaryOutputStream();
 	    ImageIO.write(thumbNail, "jpg", thumb_outstream);
-
-
 	    //Write the image to the blob object
 	    OutputStream reg_outstream = normalBlob.getBinaryOutputStream();
 	    ImageIO.write(img, "jpg", reg_outstream);
-
-
 	    //Write the image to the blob object
 	    OutputStream full_outstream = fullBlob.getBinaryOutputStream();
 	    ImageIO.write(normalSize, "jpg", full_outstream);
-
 
 	    instream.close();
 	    thumb_outstream.close();
@@ -103,39 +83,40 @@ public class UploadImage extends HttpServlet {
 	    full_outstream.close();
 
             stmt.executeUpdate("commit");
-	    response_message = " Upload OK!  ";
+	    response_message = "Upload OK!";
+	    rset1.close();
+	    rset.close();
+	    stmt.close();
             conn.close();
-
 	} catch( Exception ex ) {
-	    //System.out.println( ex.getMessage());
 	    response_message = ex.getMessage();
+	    if(response_message==null) response_message = "Invalid Input";
 	}
 
 	//Output response to the client
 	response.setContentType("text/html");
 	PrintWriter out = response.getWriter();
-	out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " +
-		    "Transitional//EN\">\n" +
-		    "<HTML>\n" +
-		    "<HEAD><TITLE>Upload Message</TITLE></HEAD>\n" +
-		    "<BODY>\n" +
-		    "<H1>" +
-		            response_message +
-		    "</H1>\n" +
-		    "</BODY></HTML>");
+	if(response_message.equals("Upload OK!")){
+	    out.println("<!DOCTYPE html>\n"+
+			"<html>\n"+
+			"<head>\n"+
+			"<meta http-equiv=\"refresh\" content=\"0;url='../upload_image.jsp?state=Image+Uploaded!\'\">\n"+
+			"</head>\n"+
+			"</html>");
+	}else{
+	    out.println("<!DOCTYPE html>\n"+
+			"<html>\n"+
+			"<head>\n"+
+			"<script type=\"text/javascript\">\n"+
+			"window.setTimeout(\"history.back(1)\", 5000);\n"+
+			"</script>\n"+
+			"</head>\n"+
+			"<body>\n"+
+			"<h1>"+response_message.trim()+"</h1>\n"+	
+			"</body>\n"+
+			"</html>");
+	}
     }
-
-    /*
-     *   To connect to the specified database
-     */
-    private static Connection getConnected( String drivername,
-					    String dbstring,
-					    String username, 
-					    String password) throws Exception {
-	Class drvClass = Class.forName(drivername); 
-	DriverManager.registerDriver((Driver) drvClass.newInstance());
-	return( DriverManager.getConnection(dbstring,username,password));
-    } 
 
     //shrink image to have height n, and return the shrinked image
     public static BufferedImage shrink(BufferedImage image, int h) {

@@ -1,41 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" >
-  <head> 
-    <title>Upload image</title> 
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="default.css" /> 
+    <style type="text/css">
+      th {text-align:right}
+      td {text-align:left}
+    </style>
+    <title>Upload an Image</title> 
   </head>
   <%@ include file="header.jsp" %>
-  <body> 
-
-    <h4> The following can be used to insert an image of BLOB type into an Oracle database.</h4>
-    Note that (1) the table in the database is created by 
-    <pre>
-      CREATE TABLE pacs_images (
-         record_id   int,
-         image_id    int,
-         thumbnail   blob,
-         regular_size blob,
-         full_size    blob,
-         PRIMARY KEY(record_id,image_id),
-         FOREIGN KEY(record_id) REFERENCES radiology_record
-      );
-    </pre>
-    (2) an SQL sequence in the database is created by
-    <pre>
-      CREATE SEQUENCE pic_id_sequence;
-    </pre>
-    <p>
-      <hr>
-      Please input or select the path of the image!
+  <body>
+    <h1><%= (null!=request.getParameter("state"))? request.getParameter("state") : ' ' %></h1>
+      <h1>Please input or select the path of an image!</h1>
       <form name="upload-image" method="POST" enctype="multipart/form-data" action="servlet/UploadImage">
-	<table>
+	<table align="center">
 	  <tr>
-	    <th>File path: </th>
-	    <td><input name="file-path" type="file" size="30" ></input></td>
-	    <th>Record_id: </th>
-	    <td><input name="record_id" type="text" size="5" ></input></td>
+	    <th>File path:</th>
+	    <td><input name="file-path" type="file" style="width:100%; background-color: #ffffff;"></input></td>
 	  </tr>
 	  <tr>
-	    <td ALIGN=CENTER COLSPAN="2"><input type="submit" name=".submit" value="Upload"></td>
+	    <th>Record_id:</th>
+	    <td><input name="record_id" type="text" value="<%= (null!=request.getParameter("record_id"))? request.getParameter("record_id") : ' ' %>" style="width:66%"></input><input type="submit" name=".submit" value="Upload" style="width:32%"></td>
 	  </tr>
 	</table>
       </form>
