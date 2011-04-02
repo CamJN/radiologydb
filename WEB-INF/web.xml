@@ -44,7 +44,7 @@ version="2.4">
 
 	    <servlet>
                 <servlet-name>GetOnePic</servlet-name>
-                <servlet-class>GetOnePic</servlet-class>
+                <servlet-class>util.GetOnePic</servlet-class>
             </servlet>
             <servlet-mapping>
                 <servlet-name>GetOnePic</servlet-name>
