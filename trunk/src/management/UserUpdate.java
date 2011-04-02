@@ -142,8 +142,8 @@ public class UserUpdate extends HttpServlet {
 	        		stmt.executeQuery("delete from family_doctor where doctor_name = '" + uname + "' and patient_name = '" + username + "'");
 	        	}
 	        }
-	        stmt.close();
 	        
+	        stmt.close();
 	        conn.commit();
 	        conn.setAutoCommit(true);
             conn.close();
