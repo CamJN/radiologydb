@@ -1,10 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-<%@ include file="header.html" %>
-<link rel="stylesheet" type="text/css" href="index.css" />
-<script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
-<script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/index.css" />
+<script language="JavaScript" type="text/javascript" src="../js/contentflow.js" load="DEFAULT"></script>
+<script language="JavaScript" src="../js/CalendarPopup.js" type="text/javascript"></script>
 <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
 <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
 </head>

@@ -14,9 +14,9 @@ String updateUserName = request.getParameter("uname");
 
 <head>
 
-    <link rel="stylesheet" type="text/css" href="default.css" />
-    <link rel="stylesheet" type="text/css" href="search.css" />
-    <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
+    <link rel="stylesheet" type="text/css" href="../css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../css/search.css" />
+    <script language="JavaScript" type="text/javascript" src="../js/contentflow.js" load="DEFAULT"></script>
 <SCRIPT LANGUAGE="JavaScript">
 
     <!-- Begin
