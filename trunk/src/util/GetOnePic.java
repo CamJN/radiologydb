@@ -1,9 +1,11 @@
 package util;
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
 
+import util.ConnectionManager.ConnectionKit;
 
 /**
  * This servlet sends one picture stored in the table below to the client
