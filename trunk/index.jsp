@@ -3,7 +3,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/default.css" />
 <link rel="stylesheet" type="text/css" href="css/index.css" />
-<script language="JavaScript" type="text/javascript" src="js/contentflow.js" load="DEFAULT"></script>
+<script language="JavaScript" type="text/javascript" src="content-flow/contentflow.js" load="DEFAULT"></script>
 <script language="JavaScript" type="text/javascript" src="js/CalendarPopup.js"></script>
 <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
 <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>

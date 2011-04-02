@@ -33,7 +33,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/default.css">
     <link rel="stylesheet" type="text/css" href="css/search.css" />
-    <script language="JavaScript" type="text/javascript" src="js/contentflow.js" load="DEFAULT"></script>
+    <script language="JavaScript" type="text/javascript" src="content-flow/contentflow.js" load="DEFAULT"></script>
     <script language="JavaScript" type="text/javascript" src="js/CalendarPopup.js"></script>
     <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
     <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
@@ -92,7 +92,7 @@
 				for (int i = 0; i < imageCount; i++) {
 					out.println("<div class=\"item\">");
 					out.println("<img class=\"content\" src=\""+thumbnailURLs[i]+"\" href=\""+fullsizeURLs[i]+"\" target=\"_blank\">");
-					out.println("<div class=\"caption\">yo</div></div>");
+					out.println("<div class=\"caption\"></div></div>");
 				}
 
 				out.println("</div>");
