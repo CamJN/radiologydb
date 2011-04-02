@@ -19,7 +19,6 @@ public class PersonsQuery {
         " WHERE (contains(user_name, '"+searchInput+"', 1) > 0 OR"+
               " contains(last_name, '"+searchInput+"', 2) > 0 OR"+
               " contains(first_name, '"+searchInput+"', 3) > 0)";
-           
         query += " ORDER BY myscore";
         
         connectionKit = new ConnectionKit();
