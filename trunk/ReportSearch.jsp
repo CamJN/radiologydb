@@ -1,15 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 <%@ page import="search.DiagnosisQuery"%>
 <%@ page import="java.sql.SQLException"%>
-
 <%
+	String USER_NAME = (String)session.getAttribute("username");
+	String USER_CLASS = (String)session.getAttribute("class");
+	String START_DATE = request.getParameter("startDate");
+	String END_DATE = request.getParameter("endDate");
+	boolean ORDERBY_DATE = request.getParameter("order") == null ? false : true;
+	
 	int MAX_RESULTS = 20;
 	int MAX_PAGELINKS = 5;
 	
     String SEARCH_INPUT = request.getParameter("searchInput");
-    String yearString = request.getParameter("year");
     if (SEARCH_INPUT == null || SEARCH_INPUT.equals("")) {
-%>      <jsp:forward page="/index.jsp"/>
+%>
+    <jsp:forward page="/index.jsp"/>
 <%  }
 
 	int START_INDEX = 0;
@@ -21,48 +29,36 @@
 	int CUR_PAGE = START_INDEX/MAX_RESULTS + 1;
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-
-    <link rel="stylesheet" type="text/css" href="default.css" />
+	<%@ include file="header.html" %>
     <link rel="stylesheet" type="text/css" href="search.css" />
     <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
-    <script language="JavaScript" src="CalendarPopup.js"></script>
-    <script language="JavaScript">document.write(getCalendarStyles());</script>
-    <script language="JavaScript">
-        var cal = new CalendarPopup("testdiv1");
-    </SCRIPT>
-    <title>RaySys</title>
+    <script language="JavaScript" src="CalendarPopup.js" type="text/javascript"></script>
+    <script language="JavaScript" type="text/javascript">document.write(getCalendarStyles());</script>
+    <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
 </head>
 
+<body>
 <%@ include file="header.jsp" %>
 
 <div id="content">
     <div id="searchDiv">
-        <form name="userSearchForm" id="userSearchForm" action="ReportSearch.jsp" method="get">
-            <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>">
-             Year:<input type="text" name="year" id="year" value="<%=yearString%>" size="15" />
-            <input name="searchButton" id="searchButton" type="submit" value="Search">
+        <form name="searchForm" id="searchForm" action="ReportSearch.jsp" method="get">
+            <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>" />
+            <input name="searchButton" id="searchButton" type="submit" value="Search" />
             <br />
+            <a name="startDateAnchor" id="startDateAnchor" href="#" onclick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;">Start Date</a>
+            <input type="text" name="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" size="15" />
+            <a name="endDateAnchor" id="endDateAnchor" href="#" onclick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" >End Date</a>
+            <input type="text" name="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" size="15" />
         </form>
-        <div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
     </div>
+    <div id="caldiv"></div>
     <div id="results">
          <%
-         	int year;
-         	try{
-         		year = Integer.parseInt(yearString.trim());
-         	}
-         	catch(NumberFormatException e)
-         	{
-         		year = 0;
-         	}
-         
              DiagnosisQuery diagnosis = null;
 		     try {
-				 diagnosis = new DiagnosisQuery(SEARCH_INPUT, year);
+				 diagnosis = new DiagnosisQuery(SEARCH_INPUT, START_DATE, END_DATE);
 				 int personCount = diagnosis.getPersonCount();
 				 
 				 if (diagnosis.absolute(START_INDEX)) {

@@ -2,7 +2,6 @@ package util;
 
 import java.sql.*;
 
-import util.ConnectionManager;
 import util.ConnectionManager.ConnectionKit;
 
 /**

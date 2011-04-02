@@ -1,6 +1,5 @@
 package search;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import util.Query;
