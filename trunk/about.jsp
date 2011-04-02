@@ -2,12 +2,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <%@ include file="header.html" %>
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/search.css" />
 </head>
 
 <body>
 
-<%@ include file="header.jsp" %>
+<%@ include file="nav.jsp" %>
 
 <div>
     RaySys is a Radiology Information System (RIS) for storing and processing information for a radiology lab.

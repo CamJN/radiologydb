@@ -1,14 +1,13 @@
 <html>
 <head>
 
-    <link rel="stylesheet" type="text/css" href="default.css" />
-    <link rel="stylesheet" type="text/css" href="search.css" />
-    <script language="JavaScript" type="text/javascript" src="contentflow.js" load="DEFAULT"></script>
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/search.css" />
     <title>RaySys</title>
 </head>
 
 <body>
-<%@ include file="header.jsp" %>
+<%@ include file="nav.jsp" %>
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 <%@ page import="util.ConnectionManager"%>
 <%@ page import="java.sql.*"%>
@@ -65,5 +64,6 @@ stmt.close();
 conn.close();
 %>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

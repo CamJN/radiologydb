@@ -28,10 +28,10 @@
     <link rel="stylesheet" type="text/css" href="../css/default.css" />
     <link rel="stylesheet" type="text/css" href="../css/search.css" />
     <script language="JavaScript" type="text/javascript" src="../js/contentflow.js" load="DEFAULT"></script>
-    <script language="JavaScript" src="CalendarPopup.js"></script>
+    <script language="JavaScript" src="../js/CalendarPopup.js"></script>
     <script language="JavaScript">document.write(getCalendarStyles());</script>
     <script language="JavaScript">
-        var cal = new CalendarPopup("testdiv1");
+        var cal = new CalendarPopup("caldiv");
     </SCRIPT>
     <title>RaySys</title>
 </head>
@@ -48,12 +48,12 @@ if(request.getAttribute("updateUserError") != null)
 
 <div id="content">
     <div id="searchDiv">
-        <form name="userSearchForm" id="userSearchForm" action="UpdateUserSearch.jsp" method="get">
+        <form name="userSearchForm" id="userSearchForm" action="user-search.jsp" method="get">
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>">
             <input name="searchButton" id="searchButton" type="submit" value="Search">
             <br />
         </form>
-        <div id="testdiv1" style="position:absolute;visibility:hidden;background-color:white;layer-background-color:white;"></div>
+        <div id="caldiv"></div>
     </div>
     <div id="results">
          <%
@@ -74,7 +74,7 @@ if(request.getAttribute("updateUserError") != null)
 						out.println("<td id=\"colAddress\" class=\"recordColumn\">" + persons.getAddress() + "</td>");
 						out.println("<td id=\"colEmail\" class=\"recordColumn\">" + persons.getEmail() + "</td>");
 						out.println("<td id=\"colPhone\" class=\"recordColumn\">" + persons.getPhone() + "</td>");
-						out.println("<td id=\"colEdit\" class=\"recordColumn\"> <A HREF=UserUpdate.jsp?uname=" + persons.getUname() + "> Edit <A/></td>");
+						out.println("<td id=\"colEdit\" class=\"recordColumn\"> <A HREF=update.jsp?uname=" + persons.getUname() + "> Edit <A/></td>");
                         
                         out.println("</tr>");
 						index++;

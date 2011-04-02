@@ -12,12 +12,12 @@
 
 <body onLoad="document.searchForm.searchInput.focus()">
 
-<%@ include file="header.jsp" %>
+<%@ include file="../nav.jsp" %>
 
 <div id="content">
     <div id="contentTitle">RaySys</div>
     <div id="searchDiv">
-        <form name="userSearchForm" id="userSearchForm" action="UpdateUserSearch.jsp" method="get">
+        <form name="userSearchForm" id="userSearchForm" action="user-search.jsp" method="get">
             <input name="searchInput" id="searchInput" value="" type="text"><br />
 
             <input name="searchButton" id="searchButton" type="submit" value="Search">
@@ -26,10 +26,7 @@
     </div>
 </div>
 
-<div id="footer">
-    <span><a href="about">About RaySys</a>
-</div>
-
+<%@ include file="../footer.jsp" %>
 </body>
 
 </html>
