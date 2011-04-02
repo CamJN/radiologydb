@@ -3,83 +3,86 @@ package search;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import util.Query;
+import util.ConnectionManager.ConnectionKit;
 
 public class DiagnosisQuery {
 
-    private Query personsQuery;
+	protected ResultSet resultSet;
+	private ConnectionKit connectionKit;
 
-    public DiagnosisQuery(String searchInput, int year) throws SQLException {
+    public DiagnosisQuery(String searchInput, String startDate, String endDate) throws SQLException {
     	if (searchInput == null || searchInput.equals("")) return;
-    	String query;
-    	if(year == 0)
-    	{
-    		query = 
+    	if (startDate != null && startDate.equals("")) startDate = null;
+        if (endDate != null && endDate.equals("")) endDate = null;
+    	String query = 
             	"SELECT myscore, p.user_name, p.first_name, p.last_name, p.address, p.phone, MIN(test_date) from persons p," +
             	"( select score(1) as myscore, patient_name,test_date from radiology_record " +
-            	"where (contains(diagnosis, '"+ searchInput +"', 1)) >0) r1 where patient_name = p.user_name" +
-            	" group by myscore, p.user_name, p.first_name, p.last_name, p.address, p.phone";
-    	}
-    	else
-    	{
-    		query = 
-            	"SELECT myscore, p.user_name, p.first_name, p.last_name, p.address, p.phone, MIN(test_date) from persons p," +
-            	"( select score(1) as myscore, patient_name,test_date from radiology_record " +
-            	"where (contains(diagnosis, '"+ searchInput +"', 1)) >0) r1 where patient_name = p.user_name and  EXTRACT(YEAR FROM test_date) = "+ year +
-            	" group by myscore, p.user_name, p.first_name, p.last_name, p.address, p.phone";
-    	}
+            	"where (contains(diagnosis, '"+ searchInput +"', 1)) >0) r1 where patient_name = p.user_name";
+    	
+    	if (startDate != null) query += " AND test_date >= to_date(?, 'dd/MM/yyyy')";
+        if (endDate != null) query += " AND test_date <= to_date(?, 'dd/MM/yyyy')";
         
-        
-        
+        query += " group by myscore, p.user_name, p.first_name, p.last_name, p.address, p.phone";
         	
-        System.out.println(query);
-        personsQuery = new Query(query, ResultSet.TYPE_SCROLL_INSENSITIVE);
+       
+        connectionKit = new ConnectionKit();
+        resultSet = connectionKit.exec(query, startDate, endDate);
     }
     
     public boolean absolute(int row) throws SQLException {
-        if (personsQuery.absolute(row)) {
+        if (resultSet.absolute(row)) {
             return true;
         }
         return false;
     }
 
     public int getPersonCount() throws SQLException {
-        return personsQuery.getRowCount();
+        return getRowCount();
     }
 
     public boolean nextRecord() throws SQLException {
-        if (personsQuery.next()) {
+        if (resultSet.next()) {
             return true;
         }
         return false;
     }
 
     public String getUname() throws SQLException {
-        return personsQuery.getString(2);
+        return resultSet.getString(2);
     }
     
     public String getFname() throws SQLException {
-        return personsQuery.getString(3);
+        return resultSet.getString(3);
     }
     
     public String getLname() throws SQLException {
-        return personsQuery.getString(4);
+        return resultSet.getString(4);
     }
 
     public String getAddress() throws SQLException {
-        return personsQuery.getString(5);
+        return resultSet.getString(5);
     }
 
     public String getPhone() throws SQLException {
-        return personsQuery.getString(6);
+        return resultSet.getString(6);
     }
     
     public String getDate() throws SQLException {
-        return personsQuery.getString(7).substring(0, personsQuery.getString(7).indexOf(':') - 1);
+        return resultSet.getString(7).substring(0, resultSet.getString(7).indexOf(':') - 1);
     }
 
     public void close() throws SQLException {
-        personsQuery.close();
+    	resultSet.close();
+    }
+    
+    public int getRowCount() throws SQLException {
+        int initialRow = resultSet.getRow();
+        resultSet.last();
+        int lastRow = resultSet.getRow();
+        if (initialRow != 0) resultSet.absolute(initialRow);
+        else resultSet.beforeFirst();
+        
+        return lastRow;
     }
 
 }
