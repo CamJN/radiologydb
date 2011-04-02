@@ -39,7 +39,7 @@ version="2.4">
             </servlet>
             <servlet-mapping>
                 <servlet-name>UploadImage</servlet-name>
-                <url-pattern>/servlet/UploadImage</url-pattern>
+                <url-pattern>/UploadImage</url-pattern>
             </servlet-mapping>
 
 	    <servlet>
@@ -48,18 +48,8 @@ version="2.4">
             </servlet>
             <servlet-mapping>
                 <servlet-name>GetOnePic</servlet-name>
-                <url-pattern>/servlet/GetOnePic</url-pattern>
+                <url-pattern>/GetOnePic</url-pattern>
             </servlet-mapping>
-
-	    <servlet>
-                <servlet-name>PictureBrowse</servlet-name>
-                <servlet-class>PictureBrowse</servlet-class>
-            </servlet>
-            <servlet-mapping>
-                <servlet-name>PictureBrowse</servlet-name>
-                <url-pattern>/servlet/PictureBrowse</url-pattern>
-            </servlet-mapping>
-
 
 	    <servlet>
                 <servlet-name>CreateRecord</servlet-name>
@@ -67,7 +57,7 @@ version="2.4">
             </servlet>
             <servlet-mapping>
                 <servlet-name>CreateRecord</servlet-name>
-                <url-pattern>/servlet/CreateRecord</url-pattern>
+                <url-pattern>/CreateRecord</url-pattern>
             </servlet-mapping>
         
 
