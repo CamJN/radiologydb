@@ -1,4 +1,4 @@
 <%
 	session.setAttribute("class", "n");
 %>
-<jsp:forward page="/Login.jsp"/>
+<jsp:forward page="/login.jsp"/>
