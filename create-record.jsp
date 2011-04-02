@@ -58,5 +58,6 @@ onClick="cal.select(document.forms['create-record'].test_date,'test_dateAnchor',
 	</tr>
       </table>
     </form><div id="caldiv" name="caldiv"></div>
+    <%@ include file="footer.jsp"%>
   </body> 
 </html>
