@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -19,7 +20,7 @@ if(request.getAttribute("newUserError") != null)
 <div style="text-align:center;">
 	<div id="contentTitle">RaySys</div>
     <div id="contentSub">New User</div>
-	<form action="newUser" method="post" accept-charset="utf-8" style="margin-top:1em">
+	<form action="newUser" method="post" accept-charset="utf-8">
 		<table border="0" style="margin:auto">
 			<tr valign=top align=left>
 				<td>User Name</td>

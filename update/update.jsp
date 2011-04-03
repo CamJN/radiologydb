@@ -106,8 +106,8 @@ String updateUserName = request.getParameter("uname");
 <%@ include file="../header.jsp" %>
 	<div id="contentTitle">RaySys</div>
     <div id="contentSub">User Update</div>
+	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8">
 <div style="text-align:center">
-	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8" style="margin-top:1em">
 		<table border="0" style="margin:auto">
 			<tr valign=top align=left>
 				<td>User Name</td>

@@ -1,4 +1,5 @@
-<HTML>
+<!DOCTYPE html>
+<html>
 	<BODY>
 		<FORM METHOD=POST ACTION="login">
 			<TABLE>
