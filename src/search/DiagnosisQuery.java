@@ -73,6 +73,7 @@ public class DiagnosisQuery {
 
     public void close() throws SQLException {
     	resultSet.close();
+    	connectionKit.close();
     }
     
 
