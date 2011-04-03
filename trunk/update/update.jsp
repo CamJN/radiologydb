@@ -248,7 +248,10 @@ String updateUserName = request.getParameter("uname");
 	<%}%>
 	<center><p><input type="button" value="Update" onClick="saveMe();"></p></center>
 
-<%conn.close();%>
+<%
+stmt.close();
+conn.close();
+%>
 <%@ include file="../footer.jsp" %>
 </body>
 </html>
