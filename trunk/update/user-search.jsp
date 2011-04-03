@@ -8,7 +8,7 @@
 	
     String SEARCH_INPUT = request.getParameter("searchInput");
     if (SEARCH_INPUT == null || SEARCH_INPUT.equals("")) {
-%>      <jsp:forward page="/index.jsp"/>
+%>      <jsp:forward page="index.jsp"/>
 <%  }
 	
 	int START_INDEX = 0;
@@ -20,9 +20,8 @@
 	int CUR_PAGE = START_INDEX/MAX_RESULTS + 1;
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<!DOCTYPE html>
+<html>
 <head>
 
     <link rel="stylesheet" type="text/css" href="../css/default.css" />
@@ -36,6 +35,7 @@
     <title>RaySys</title>
 </head>
 
+<body onLoad="document.searchForm.searchInput.focus()">
 <%@ include file="../header.jsp" %>
 <%
 if(request.getAttribute("updateUserError") != null)
@@ -47,6 +47,8 @@ if(request.getAttribute("updateUserError") != null)
 %>
 
 <div id="content">
+	<div id="contentTitle">RaySys</div>
+    <div id="contentSub">User Search</div>
     <div id="searchDiv">
         <form name="userSearchForm" id="userSearchForm" action="user-search.jsp" method="get">
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>">
@@ -109,9 +111,7 @@ if(request.getAttribute("updateUserError") != null)
 
 </div>
 
-<div id="footer">
-    <span><a href="about">About RaySys</a>
-</div>
+<%@ include file="../footer.jsp" %>
 
 </body>
 

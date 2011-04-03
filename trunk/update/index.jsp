@@ -13,9 +13,10 @@
 <body onLoad="document.searchForm.searchInput.focus()">
 
 <%@ include file="../header.jsp" %>
-
+	
 <div id="content">
-    <div id="contentTitle">RaySys</div>
+	<div id="contentTitle">RaySys</div>
+    <div id="contentSub">User Search</div>
     <div id="searchDiv">
         <form name="userSearchForm" id="userSearchForm" action="user-search.jsp" method="get">
             <input name="searchInput" id="searchInput" value="" type="text"><br />
