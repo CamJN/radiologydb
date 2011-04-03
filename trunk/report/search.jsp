@@ -103,6 +103,7 @@
 			 } finally {
 				 if (diagnosis != null) diagnosis.close();
 			 }
+			 diagnosis.close();
 		 %>
     </div>
 
