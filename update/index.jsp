@@ -12,7 +12,11 @@
 <body onLoad="document.searchForm.searchInput.focus()">
 
 <%@ include file="../header.jsp" %>
-	
+<%
+if(!(userClass.equals("a"))){
+	response.sendRedirect("/radiologydb/");
+}%>
+
 <div id="content">
 	<div id="contentTitle">RaySys</div>
     <div id="contentSub">User Search</div>

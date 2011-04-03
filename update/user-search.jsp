@@ -38,6 +38,9 @@
 <body onLoad="document.searchForm.searchInput.focus()">
 <%@ include file="../header.jsp" %>
 <%
+if(!(userClass.equals("a"))){
+	response.sendRedirect("/radiologydb/");
+}
 if(request.getAttribute("updateUserError") != null)
 {%>
 	<p>Invalid data please try again</p>

@@ -103,7 +103,12 @@ String updateUserName = request.getParameter("uname");
 <body>
 
 
-<%@ include file="../header.jsp" %>
+<%@ include file="../header.jsp"%>
+<%
+if(!(userClass.equals("a"))){
+	response.sendRedirect("/radiologydb/");
+}%>
+
 	<div id="contentTitle">RaySys</div>
     <div id="contentSub">User Update</div>
 	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8">

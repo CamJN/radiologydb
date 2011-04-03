@@ -9,7 +9,6 @@
 	String USER_CLASS = (String)session.getAttribute("class");
 	String START_DATE = request.getParameter("startDate");
 	String END_DATE = request.getParameter("endDate");
-	boolean ORDERBY_DATE = request.getParameter("order") == null ? false : true;
 	
 	int MAX_RESULTS = 20;
 	int MAX_PAGELINKS = 5;
@@ -17,7 +16,7 @@
     String SEARCH_INPUT = request.getParameter("searchInput");
     if (SEARCH_INPUT == null || SEARCH_INPUT.equals("")) {
 %>
-    <jsp:forward page="/radiologydb/index.jsp"/>
+    <jsp:forward page="index.jsp"/>
 <%  }
 
 	int START_INDEX = 0;
@@ -40,6 +39,11 @@
 
 <body>
 <%@ include file="../header.jsp" %>
+<%
+if(!(userClass.equals("a"))){
+	response.sendRedirect("/radiologydb/");
+}%>
+
 
 <div id="content">
 	<div id="contentTitle">RaySys</div>
