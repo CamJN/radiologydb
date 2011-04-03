@@ -10,6 +10,9 @@
 <body>
 <%@ include file="header.jsp" %>
 <%
+if(!(userClass.equals("a"))){
+	response.sendRedirect("/radiologydb/");
+}
 if(request.getAttribute("newUserError") != null)
 {%>
 	<p>Invalid data please try again</p>
