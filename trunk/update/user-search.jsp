@@ -38,9 +38,6 @@
 <body onLoad="document.searchForm.searchInput.focus()">
 <%@ include file="../header.jsp" %>
 <%
-if(!(userClass.equals("a"))){
-	response.sendRedirect("/radiologydb/");
-}
 if(request.getAttribute("updateUserError") != null)
 {%>
 	<p>Invalid data please try again</p>
@@ -93,10 +90,10 @@ if(request.getAttribute("updateUserError") != null)
 					 int pageNumber = CUR_PAGE;
 					 
 					 if (CUR_PAGE > 1) {
-					 	out.println("<span><a href=\"/radiologydb/UpdateUserSearch.jsp?searchInput="+SEARCH_INPUT+"&start="+(pageNumber-2)*MAX_RESULTS+"\">Prev</a></span>");
+					 	out.println("<span><a href=\"/radiologydb/update/user-search.jsp?searchInput="+SEARCH_INPUT+"&start="+(pageNumber-2)*MAX_RESULTS+"\">Prev</a></span>");
 					 }
 					 if (CUR_PAGE < numPages) {
-						 out.println("<span><a href=\"/radiologydb/UpdateUserSearch.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");
+						 out.println("<span><a href=\"/radiologydb/update/user-search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");
 					 }
 					 out.println("<br/>");
 					 out.println("<span>Showing results "+ (START_INDEX) + " to " + (index+START_INDEX-2) + " of " + personCount + " results</span>");

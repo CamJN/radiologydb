@@ -107,10 +107,9 @@
 			 out.println("<div id=\"pagination\">");
 			 
 			 int numPages = (int)Math.ceil((double)recordCount/MAX_RESULTS);
-			 int pageNumber = CUR_PAGE;
 			 
 			 if (CUR_PAGE > 1) {
-				out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(pageNumber-2)*MAX_RESULTS+"\">Prev</a></span>");		     }
+				out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE-2)*MAX_RESULTS+"\">Prev</a></span>");		     }
 				
 			 if (CUR_PAGE < numPages) {
 				 out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");

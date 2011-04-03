@@ -9,7 +9,7 @@
 		}
     	
     	if(!(userClass.equals("a") || userClass.equals("p") || userClass.equals("r") || userClass.equals("d"))){
-			response.sendRedirect("/radiologydb/");
+			response.sendRedirect("/radiologydb/login.jsp");
     }	if(userClass.equals("a")){%>
     		<span><a href="/radiologydb/new-user.jsp">Add User</a></span>
     		<span><a href="/radiologydb/update/index.jsp">Update User</a></span>
