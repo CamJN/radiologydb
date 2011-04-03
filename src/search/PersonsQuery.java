@@ -68,6 +68,6 @@ public class PersonsQuery {
     }
 
     public void close() throws SQLException {
-        resultSet.close();
+        connectionKit.close();
     }
 }
