@@ -104,12 +104,11 @@ String updateUserName = request.getParameter("uname");
 
 
 <%@ include file="../header.jsp" %>
-
+	<div id="contentTitle">RaySys</div>
+    <div id="contentSub">User Update</div>
 <div style="text-align:center">
-	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8">
-		<table border="0">
-			<tr><th>Update User</th></tr>
-			<tr><th>Please update where needed</th></tr>
+	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8" style="margin-top:1em">
+		<table border="0" style="margin:auto">
 			<tr valign=top align=left>
 				<td>User Name</td>
 				<td><%= rset.getString(1) %></td>
