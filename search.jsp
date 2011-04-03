@@ -6,11 +6,14 @@
 <%@ page import="java.sql.SQLException"%>
 
 <%
+	String NO_RESULTS = "No records containing your search terms were found.";
 	String USER_NAME = (String)session.getAttribute("username");
-	String USER_CLASS = (String)session.getAttribute("class");
 	String START_DATE = request.getParameter("startDate");
 	String END_DATE = request.getParameter("endDate");
 	boolean ORDERBY_DATE = request.getParameter("order") == null ? false : true;
+	
+	if (START_DATE == null) START_DATE = "";
+	if (END_DATE == null) END_DATE = "";
 	
 	int MAX_RESULTS = 20;
 	int MAX_PAGELINKS = 5;
@@ -55,15 +58,14 @@
             <input type="text" name="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" size="15" />
             <a name="endDateAnchor" id="endDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" >End Date</a>
             <input type="text" name="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" size="15" />
-            <input type="checkbox" name="order" id="order" value="date" <%if (ORDERBY_DATE) out.print("checked");%>/>
-            Order By Date
+            <input type="checkbox" name="order" id="order" value="date" <%if (ORDERBY_DATE) out.print("checked");%>/>Order By Date
         </form>
     </div>
     <div id="caldiv"></div>
     <div id="results"><%
 	RecordsQuery records = null;
 	 try {
-		 records = new RecordsQuery(SEARCH_INPUT, USER_NAME, USER_CLASS, START_DATE, END_DATE, ORDERBY_DATE);
+		 records = new RecordsQuery(SEARCH_INPUT, USER_NAME, userClass, START_DATE, END_DATE, ORDERBY_DATE);
 		 int recordCount = records.getRecordCount();
 		 
 		 if (records.absolute(START_INDEX)) {
@@ -118,10 +120,10 @@
 			 out.println("<span>Showing "+ (START_INDEX) + " - " + (index+START_INDEX-2) + " of " + recordCount + " results</span>");
 			 out.println("</div>");
 		 } else {
-			 out.println("No records containing your search terms were found. lol");
+			 out.println(NO_RESULTS);
 		 }
 	 } catch (SQLException e) {
-		 out.println("No records containing your search terms were found.");
+		 out.println(NO_RESULTS);
 	 } finally {
 		 if (records != null) records.close();
 	 }
