@@ -64,17 +64,17 @@
 				 int personCount = diagnosis.getPersonCount();
 				 
 				 if (diagnosis.absolute(START_INDEX)) {
-					 out.println("<table id=\"resultsTable\">");
+					 out.println("<table id=\"resultsTable\" style=\"margin:auto\">");
 					 out.println("<tr><th>User Name</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th>Date</th></tr>");
 					 int index = 1;
 					 do {
 						out.println("<tr class=\"recordRow\">");
-						out.println("<td id=\"colUserName\" class=\"recordColumn\">" + diagnosis.getUname() + "</td>");
-						out.println("<td id=\"colFirstName\" class=\"recordColumn\">" + diagnosis.getFname() + "</td>");
-						out.println("<td id=\"colLastName\" class=\"recordColumn\">" + diagnosis.getLname() + "</td>");
-						out.println("<td id=\"colAddress\" class=\"recordColumn\">" + diagnosis.getAddress() + "</td>");
-						out.println("<td id=\"colPhone\" class=\"recordColumn\">" + diagnosis.getPhone() + "</td>");
-						out.println("<td id=\"colDate\" class=\"recordColumn\">" + diagnosis.getDate() + "</td>");
+						out.println("<td id=\"colUserName\" >" + diagnosis.getUname() + "</td>");
+						out.println("<td id=\"colFirstName\" >" + diagnosis.getFname() + "</td>");
+						out.println("<td id=\"colLastName\" >" + diagnosis.getLname() + "</td>");
+						out.println("<td id=\"colAddress\" >" + diagnosis.getAddress() + "</td>");
+						out.println("<td id=\"colPhone\" >" + diagnosis.getPhone() + "</td>");
+						out.println("<td id=\"colDate\" >" + diagnosis.getDate() + "</td>");
                         out.println("</tr>");
 						index++;
 					 } while (diagnosis.nextRecord() && index <= MAX_RESULTS );
