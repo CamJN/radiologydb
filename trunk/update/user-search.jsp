@@ -65,18 +65,18 @@ if(request.getAttribute("updateUserError") != null)
 				 int personCount = persons.getPersonCount();
 				 
 				 if (persons.absolute(START_INDEX)) {
-					 out.println("<table id=\"resultsTable\">");
+					 out.println("<table id=\"resultsTable\" style=\"margin:auto\">");
 					 out.println("<tr><th>User Name</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Email</th><th>Phone</th></tr>");
 					 int index = 1;
 					 do {
 						out.println("<tr class=\"recordRow\">");
-						out.println("<td id=\"colUserName\" class=\"recordColumn\">" + persons.getUname() + "</td>");
-						out.println("<td id=\"colFirstName\" class=\"recordColumn\">" + persons.getFname() + "</td>");
-						out.println("<td id=\"colLastName\" class=\"recordColumn\">" + persons.getLname() + "</td>");
-						out.println("<td id=\"colAddress\" class=\"recordColumn\">" + persons.getAddress() + "</td>");
-						out.println("<td id=\"colEmail\" class=\"recordColumn\">" + persons.getEmail() + "</td>");
-						out.println("<td id=\"colPhone\" class=\"recordColumn\">" + persons.getPhone() + "</td>");
-						out.println("<td id=\"colEdit\" class=\"recordColumn\"> <A HREF=update.jsp?uname=" + persons.getUname() + "> Edit <A/></td>");
+						out.println("<td id=\"colUserName\" >" + persons.getUname() + "</td>");
+						out.println("<td id=\"colFirstName\" >" + persons.getFname() + "</td>");
+						out.println("<td id=\"colLastName\" >" + persons.getLname() + "</td>");
+						out.println("<td id=\"colAddress\" >" + persons.getAddress() + "</td>");
+						out.println("<td id=\"colEmail\" >" + persons.getEmail() + "</td>");
+						out.println("<td id=\"colPhone\" >" + persons.getPhone() + "</td>");
+						out.println("<td id=\"colEdit\"  <A HREF=update.jsp?uname=" + persons.getUname() + "> Edit <A/></td>");
                         
                         out.println("</tr>");
 						index++;
