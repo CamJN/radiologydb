@@ -8,7 +8,7 @@
     </style>
     <title>Upload an Image</title> 
   </head>
-  <%@ include file="nav.jsp" %>
+  <%@ include file="header.jsp" %>
   <body>
     <h1><%= (null!=request.getParameter("state"))? request.getParameter("state") : ' ' %></h1>
       <h1>Please input or select the path of an image!</h1>

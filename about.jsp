@@ -8,7 +8,7 @@
 
 <body>
 
-<%@ include file="nav.jsp" %>
+<%@ include file="header.jsp" %>
 
 <div>
     RaySys is a Radiology Information System (RIS) for storing and processing information for a radiology lab.

@@ -9,7 +9,7 @@
 <script language="JavaScript" type="text/javascript">var cal = new CalendarPopup("caldiv");</script>
 </head>
 <body onload="document.searchForm.searchInput.focus()">
-<%@ include file="../nav.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div id="content">
     <div id="contentTitle">RaySys</div>

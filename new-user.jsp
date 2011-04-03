@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<%@ include file="nav.jsp" %>
+<%@ include file="header.jsp" %>
 <%
 if(request.getAttribute("newUserError") != null)
 {%>

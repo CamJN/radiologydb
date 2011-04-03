@@ -103,7 +103,7 @@ String updateUserName = request.getParameter("uname");
 <body>
 
 
-<%@ include file="../nav.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div style="text-align:center">
 	<form name = "userUpdate" action="../userUpdate" method="post" accept-charset="utf-8">

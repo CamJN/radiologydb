@@ -12,7 +12,7 @@
 
 <body onLoad="document.searchForm.searchInput.focus()">
 
-<%@ include file="../nav.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div id="content">
     <div id="contentTitle">RaySys</div>

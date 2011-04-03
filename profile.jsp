@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<%@ include file="nav.jsp" %>
+<%@ include file="header.jsp" %>
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 <%@ page import="util.ConnectionManager"%>
 <%@ page import="java.sql.*"%>
