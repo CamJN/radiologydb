@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/default.css" />
     <style type="text/css">
       th {text-align:right}
-      input, textarea {width:250px}
+      form.input, form.textarea {width:250px}
     </style>
     <script language="JavaScript" src="js/CalendarPopup.js"></script>
     <script language="JavaScript">document.write(getCalendarStyles());</script>
@@ -36,7 +36,7 @@
 	<tr>
 	  <th><a href="#" name="prescribing_dateAnchor" id="prescribing_dateAnchor"
 onClick="cal.select(document.forms['create-record'].prescribing_date,'prescribing_dateAnchor','yyyy-MM-dd'); cal.showCalendar('prescribing_dateAnchor'); return false;">Prescribing_Date</a>:</th>
-	  <td><input name="prescribing_date" id="prescribing_date" type="date" size="50" maxlength="30" placeholder="yyyy-mm-dd" ></input></td>
+	  <td><input name="prescribing_date" id="prescribing_date" type="date" size="50" placeholder="yyyy-mm-dd" ></input></td>
 	</tr>
 	<tr>
 	  <th><a href="#" name="test_dateAnchor" id="test_dateAnchor"
@@ -59,5 +59,5 @@ onClick="cal.select(document.forms['create-record'].test_date,'test_dateAnchor',
       </table>
     </form><div id="caldiv" name="caldiv"></div>
     <%@ include file="footer.jsp"%>
-  </body> 
+  </body>
 </html>
