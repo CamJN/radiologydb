@@ -17,12 +17,11 @@ Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CON
 ResultSet rset = stmt.executeQuery("select u.user_name, u.password, u.class, p.first_name, p.last_name, p.address, p.email, p.phone from users u, persons p where u.user_name ='"+ session.getAttribute("username") +"' and u.user_name =  p.user_name");
 rset.next();
 %>
-
+	<div id="contentTitle">RaySys</div>
+    <div id="contentSub">User Profile</div>
 <div style="text-align:center;">
 	<form name = "userUpdate" action="userUpdate" method="post" accept-charset="utf-8">
-		<table border="0">
-			<tr><th>Update User</th></tr>
-			<tr><th>Please update where needed</th></tr>
+		<table border="0" style="margin:auto">
 			<tr valign=top align=left>
 				<td>User Name</td>
 				<td><%= rset.getString(1) %></td>
