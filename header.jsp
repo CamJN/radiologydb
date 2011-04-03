@@ -1,5 +1,5 @@
 <div id="header">
-    <span><a href="index.jsp">Search</a></span>
+    <span><a href="/radiologydb/index.jsp">Search</a></span>
     <%
     	String userClass;
     	if(session.getAttribute("class") == null)

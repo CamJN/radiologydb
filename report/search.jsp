@@ -42,6 +42,8 @@
 <%@ include file="../header.jsp" %>
 
 <div id="content">
+	<div id="contentTitle">RaySys</div>
+    <div id="contentSub">Diagnosis Search</div>
     <div id="searchDiv">
         <form name="searchForm" id="searchForm" action="search.jsp" method="get">
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>" />
