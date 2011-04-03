@@ -107,10 +107,11 @@ public class CreateRecord extends HttpServlet {
 	response.setContentType("text/html");
 	PrintWriter out = response.getWriter();
 	//include here a redirect to upload_image or just got there directly
-	if(response_message.equals("Create OK!")){
+	if(response_message != null && response_message.equals("Create OK!")){
 	    out.println("<!DOCTYPE html>\n"+
 			"<html>\n"+
 			"<head>\n"+
+	        "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/default.css\">"+
 			"<meta http-equiv=\"refresh\" content=\"0;url='upload-image.jsp?record_id="+record_id+"&state=Record+Created!'\">\n"+
 			"</head>\n"+
 			"</html>");
@@ -118,12 +119,13 @@ public class CreateRecord extends HttpServlet {
 	    out.println("<!DOCTYPE html>\n"+
 			"<html>\n"+
 			"<head>\n"+
+			"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/default.css\">"+
 			"<script type=\"text/javascript\">\n"+
 			"window.setTimeout(\"history.back(1)\", 5000);\n"+
 			"</script>\n"+
 			"</head>\n"+
 			"<body>\n"+
-			"<h1>"+response_message.trim()+"</h1>\n"+	
+			"<h2>"+"Record was incomplete or invalid and could not be uploaded."+"</h2>\n"+	
 			"</body>\n"+
 			"</html>");
 	}

@@ -101,6 +101,7 @@ public class UploadImage extends HttpServlet {
 	    out.println("<!DOCTYPE html>\n"+
 			"<html>\n"+
 			"<head>\n"+
+	        "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/default.css\">"+
 			"<meta http-equiv=\"refresh\" content=\"0;url='upload-image.jsp?state=Image+Uploaded!\'\">\n"+
 			"</head>\n"+
 			"</html>");
@@ -108,12 +109,13 @@ public class UploadImage extends HttpServlet {
 	    out.println("<!DOCTYPE html>\n"+
 			"<html>\n"+
 			"<head>\n"+
+	        "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/default.css\">"+
 			"<script type=\"text/javascript\">\n"+
 			"window.setTimeout(\"history.back(1)\", 5000);\n"+
 			"</script>\n"+
 			"</head>\n"+
 			"<body>\n"+
-			"<h1>"+response_message.trim()+"</h1>\n"+	
+			"<h1>"+"Image could not be uploaded."+"</h1>\n"+	
 			"</body>\n"+
 			"</html>");
 	}
