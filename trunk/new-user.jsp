@@ -24,35 +24,35 @@ if(request.getAttribute("newUserError") != null)
 		<table border="0" style="margin:auto">
 			<tr valign=top align=left>
 				<td>User Name</td>
-				<td><input type="text" name="username"></td>	
+				<td><input type="text" name="username" maxlength="24"></td>	
 			</tr>	
 			<tr valign=top align=left>
 				<td>Password</td>
-				<td><input type="text" name="password"></td>	
+				<td><input type="text" name="password" maxlength="24"></td>	
 			</tr>	
 			<tr valign=top align=left>
 				<td>class</td>
-				<td><input type="text" name="class"></td>	
+				<td><input type="text" name="class" maxlength="1"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>First Name</td>
-				<td><input type="text" name="fname"></td>	
+				<td><input type="text" name="fname" maxlength="24"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Last Name</td>
-				<td><input type="text" name="lname"></td>	
+				<td><input type="text" name="lname" maxlength="24"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Address</td>
-				<td><input type="text" name="address"></td>	
+				<td><input type="text" name="address" maxlength="128"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Email</td>
-				<td><input type="text" name="email"></td>	
+				<td><input type="text" name="email" maxlength="128"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Phone</td>
-				<td><input type="text" name="phone"></td>
+				<td><input type="text" name="phone" maxlength="10"></td>
 			</tr>
 			<trt>
 				<td></td><td align =right><input type="submit" value="Add User"></td>

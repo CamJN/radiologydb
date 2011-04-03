@@ -24,13 +24,14 @@ public class LoginModule extends HttpServlet {
 		Connection conn;
 		ResultSet rset = null;
 
-		String userSearch = "select password, class from users where user_name = '"
-				+ username + "'";
+		PreparedStatement statement = null;  
+		
 		
 		try {
 			conn = ConnectionManager.getConnection();
-			Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-			rset = stmt.executeQuery(userSearch);
+			statement = conn.prepareStatement("select password, class from users where user_name = ?");
+			statement.setString(1, username);
+			rset = statement.executeQuery();
 
 			String truepwd = "";
 			String userClass = "";
@@ -42,7 +43,7 @@ public class LoginModule extends HttpServlet {
 			}
 			
 			rset.close();
-			stmt.close();
+			statement.close();
             conn.close();
 			// display the result
 			if (password.equals(truepwd))

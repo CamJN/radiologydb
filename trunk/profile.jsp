@@ -29,30 +29,30 @@ rset.next();
 			</tr>	
 			<tr valign=top align=left>
 				<td>Password</td>
-				<td><input type="text" name="password" value = <%= rset.getString(2) %>></td>	
+				<td><input type="text" name="password" value = <%= rset.getString(2) %> maxlength="24"></td>	
 			</tr>	
 			<tr valign=top align=left>
 				<td><input type="hidden" name="class" value = <%= rset.getString(3) %>></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>First Name</td>
-				<td><input type="text" name="fname" value = <%= rset.getString(4) %>></td>	
+				<td><input type="text" name="fname" value = <%= rset.getString(4) %> maxlength="24"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Last Name</td>
-				<td><input type="text" name="lname" value = <%= rset.getString(5) %>></td>	
+				<td><input type="text" name="lname" value = <%= rset.getString(5) %> maxlength="24"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Address</td>
-				<td><input type="text" name="address" value = <%= rset.getString(6) %>></td>	
+				<td><input type="text" name="address" value = <%= rset.getString(6) %> maxlength="128"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Email</td>
-				<td><input type="text" name="email" value = <%= rset.getString(7) %>></td>	
+				<td><input type="text" name="email" value = <%= rset.getString(7) %> maxlength="128"></td>	
 			</tr>
 			<tr valign=top align=left>
 				<td>Phone</td>
-				<td><input type="text" name="phone" value = <%= rset.getString(8) %>></td>	
+				<td><input type="text" name="phone" value = <%= rset.getString(8) %> maxlength="10"></td>	
 			</tr>
 		</table>
 		<p><input type="submit" value="Update"></p>
