@@ -121,7 +121,7 @@
 			 out.println("No records containing your search terms were found. lol");
 		 }
 	 } catch (SQLException e) {
-		 out.println("No records containing your search terms were found." + e.getMessage());
+		 out.println("No records containing your search terms were found.");
 	 } finally {
 		 if (records != null) records.close();
 	 }

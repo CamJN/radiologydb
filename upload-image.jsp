@@ -10,8 +10,12 @@
   </head>
   <%@ include file="header.jsp" %>
   <body>
+  <div id="content">
+  	<div id="contentTitle">RaySys</div>
+    <div id="contentSub">Upload Image</div>
+    
     <h1><%= (null!=request.getParameter("state"))? request.getParameter("state") : ' ' %></h1>
-      <h1>Please input or select the path of an image!</h1>
+
       <form name="upload-image" method="POST" enctype="multipart/form-data" action="UploadImage">
 	<table align="center">
 	  <tr>
@@ -24,6 +28,7 @@
 	  </tr>
 	</table>
       </form>
+      </div>
     <%@ include file="footer.jsp"%>
   </body> 
 </html>
