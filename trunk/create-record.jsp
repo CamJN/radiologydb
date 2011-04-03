@@ -12,7 +12,7 @@
 
     <title>Create a Record</title> 
   </head>
-  <%@ include file="nav.jsp" %>
+  <%@ include file="header.jsp" %>
   <body> 
     <form name="create-record" method="POST" enctype="multipart/form-data" action="CreateRecord">
       <h1>Please enter record data!</h1>

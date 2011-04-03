@@ -39,7 +39,7 @@
 </head>
 
 <body>
-<%@ include file="../nav.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <div id="content">
     <div id="searchDiv">
