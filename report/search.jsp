@@ -10,14 +10,16 @@
 	String START_DATE = request.getParameter("startDate");
 	String END_DATE = request.getParameter("endDate");
 	
+	if (START_DATE == null) START_DATE = "";
+	if (END_DATE == null) END_DATE = "";
+	
 	int MAX_RESULTS = 20;
 	int MAX_PAGELINKS = 5;
 	
     String SEARCH_INPUT = request.getParameter("searchInput");
     if (SEARCH_INPUT == null || SEARCH_INPUT.equals("")) {
-%>
-    <jsp:forward page="index.jsp"/>
-<%  }
+		response.sendRedirect("/radiologydb/");
+	}
 
 	int START_INDEX = 0;
 	try {
@@ -53,9 +55,9 @@ if(!(userClass.equals("a"))){
             <input name="searchInput" id="searchInput" type="text" value="<%=StringEscapeUtils.escapeHtml(SEARCH_INPUT)%>" />
             <input name="searchButton" id="searchButton" type="submit" value="Search" />
             <br />
-            <a name="startDateAnchor" id="startDateAnchor" href="#" onclick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;">Start Date</a>
+            <a name="startDateAnchor" id="startDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;">Start Date</a>
             <input type="text" name="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" size="15" />
-            <a name="endDateAnchor" id="endDateAnchor" href="#" onclick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" >End Date</a>
+            <a name="endDateAnchor" id="endDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" >End Date</a>
             <input type="text" name="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" size="15" />
         </form>
     </div>
@@ -91,10 +93,10 @@ if(!(userClass.equals("a"))){
 					 int pageNumber = CUR_PAGE;
 					 
 					 if (CUR_PAGE > 1) {
-					 	out.println("<span><a href=\"/radiologydb/UpdateUserSearch.jsp?searchInput="+SEARCH_INPUT+"&start="+(pageNumber-2)*MAX_RESULTS+"\">Prev</a></span>");
+					 	out.println("<span><a href=\"/radiologydb/report/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(pageNumber-2)*MAX_RESULTS+"\">Prev</a></span>");
 					 }
 					 if (CUR_PAGE < numPages) {
-						 out.println("<span><a href=\"/radiologydb/UpdateUserSearch.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");
+						 out.println("<span><a href=\"/radiologydb/report/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");
 					 }
 					 out.println("<br/>");
 					 out.println("<span>Showing results "+ (START_INDEX) + " to " + (index+START_INDEX-2) + " of " + personCount + " results</span>");
@@ -107,7 +109,6 @@ if(!(userClass.equals("a"))){
 			 } finally {
 				 if (diagnosis != null) diagnosis.close();
 			 }
-			 diagnosis.close();
 		 %>
     </div>
 

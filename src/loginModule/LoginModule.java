@@ -11,6 +11,10 @@ import util.ConnectionManager;
 
 @SuppressWarnings("serial")
 public class LoginModule extends HttpServlet {
+    
+    private static final String HEADER = "<!doctype html><html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"css/default.css\" /></head><body>";
+    private static final String FOOTER = "</body></html>";
+    
   public void doGet( HttpServletRequest request, HttpServletResponse response )
 	throws ServletException, IOException {
 
@@ -55,12 +59,10 @@ public class LoginModule extends HttpServlet {
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 			else
-				out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
+				out.println(HEADER+"<p><b>Either your userName or Your password is inValid!</b></p>"+FOOTER);
 
 		} catch (SQLException ex) {
-			out.println("<p>Could not connecect to server</p>");
-			System.err.println("SQLException: " + ex.getMessage());
-
+			out.println(HEADER+"<p>Could not connecect to server</p>"+FOOTER);
 		}
 		
 		
