@@ -125,8 +125,28 @@ Report generation presents the user with the now very familiar search layout. Th
 \end{quote}
 
 \section*{Record Creation}
+The record creation is done in two parts, first a simple form that takes in all relevant data for a Radiology Record, then a servlet to send that data to oracle using the sql statements: "SELECT rec_id_sequence.nextval from dual" and  "insert into radiology_record(record_id,patient_name,doctor_name,radiologist_name,test_type,prescribing_date,test_date,diagnosis,description) values (?,?,?, ?,?,?, ?,?,?)" where the '?''s are replaced with the relevant data using setOBJTYPE() style methods.
+The status of the creation is flashed to the screen after the user submits and upon succes the page forwards to an image upload page with the record id already filled in, and upon failure return the user to the record create page, data intac to try and fix the data or figure out their error.  
+
+\begin{quote}
+\emph{*.jsp:} \texttt{/radiologydb/create-record.jsp} \\
+\emph{*.java: } \texttt{CreateRecord.java}
+\end{quote}
+
+
 
 \section*{Image Upload}
+The image uploading is done in two parts the image path on the users computer and record id are chosen on one page, and then upon submit the data is passed to a servlet and the image is read in and resized to the three relevant sizes, then stored in the database using the SQL statements:
+
+	    ResultSet rset1 = stmt.executeQuery("SELECT pic_id_sequence.nextval from dual");
+	    stmt.execute( "insert into pacs_images (record_id,image_id,thumbnail,regular_size,full_size) values ("+record_id+","+pic_id+",empty_blob(),empty_blob(),empty_blob())");
+
+again if the upload is successful the page forwards you to the upload page with a success message, otherwise it flashes an error message and returns you to the upload page to try and fix the data.
+
+\begin{quote}
+\emph{*.jsp:} \texttt{/radiologydb/upload-image.jsp} \\
+\emph{*.java: } \texttt{UploadImage.java}
+\end{quote}
 
 \section*{Conclusion}
 
