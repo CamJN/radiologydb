@@ -1,0 +1,26 @@
+\expandafter\ifx\csname doTocEntry\endcsname\relax \expandafter\endinput\fi 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{2}{x2-1000}{QQ2-2-1}{Login}}{2}\relax 
+\doTocEntry\toclof{1}{\csname a:TocLink\endcsname{2}{x2-10011}{}{\ignorespaces RaySys Login}}{figure}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{3}{x3-2000}{QQ2-3-3}{Header}}{7}\relax 
+\doTocEntry\toclof{2}{\csname a:TocLink\endcsname{3}{x3-20012}{}{\ignorespaces Sample Admin header}}{figure}\relax 
+\doTocEntry\toclof{3}{\csname a:TocLink\endcsname{3}{x3-20023}{}{\ignorespaces Sample Patient header}}{figure}\relax 
+\doTocEntry\toclof{4}{\csname a:TocLink\endcsname{3}{x3-20034}{}{\ignorespaces Sample Radiologyst header}}{figure}\relax 
+\doTocEntry\toclof{5}{\csname a:TocLink\endcsname{3}{x3-20045}{}{\ignorespaces Sample Doctor header}}{figure}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{4}{x4-3000}{QQ2-4-8}{Admin}}{21}\relax 
+\doTocEntry\toclikesection{}{\csname a:TocLink\endcsname{4}{x4-4000}{QQ2-4-9}{Add User}}{21}\relax 
+\doTocEntry\toclof{6}{\csname a:TocLink\endcsname{4}{x4-40016}{}{\ignorespaces Sample User Add Screen}}{figure}\relax 
+\doTocEntry\toclikesection{}{\csname a:TocLink\endcsname{4}{x4-5000}{QQ2-4-11}{User Update}}{24}\relax 
+\doTocEntry\toclof{7}{\csname a:TocLink\endcsname{4}{x4-50017}{}{\ignorespaces User Update Step 1}}{figure}\relax 
+\doTocEntry\toclof{8}{\csname a:TocLink\endcsname{4}{x4-50028}{}{\ignorespaces User Update Step 2}}{figure}\relax 
+\doTocEntry\toclikesection{}{\csname a:TocLink\endcsname{4}{x4-6000}{QQ2-4-14}{Report Generation}}{30}\relax 
+\doTocEntry\toclof{9}{\csname a:TocLink\endcsname{4}{x4-60019}{}{\ignorespaces Report Generation}}{figure}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{5}{x5-7000}{QQ2-5-16}{Radiologyst}}{35}\relax 
+\doTocEntry\toclikesection{}{\csname a:TocLink\endcsname{5}{x5-8000}{QQ2-5-17}{Add Record}}{35}\relax 
+\doTocEntry\toclof{10}{\csname a:TocLink\endcsname{5}{x5-800110}{}{\ignorespaces Radiologyst Record Creation}}{figure}\relax 
+\doTocEntry\toclikesection{}{\csname a:TocLink\endcsname{5}{x5-9000}{QQ2-5-19}{Upload Image}}{38}\relax 
+\doTocEntry\toclof{11}{\csname a:TocLink\endcsname{5}{x5-900111}{}{\ignorespaces Radiologyst Upload Image}}{figure}\relax 
+\doTocEntry\toclikechapter{}{\csname a:TocLink\endcsname{6}{x6-10000}{QQ2-6-21}{General Use}}{43}\relax 
+\doTocEntry\toclikesection{}{\csname a:TocLink\endcsname{6}{x6-11000}{QQ2-6-22}{Search}}{43}\relax 
+\doTocEntry\toclof{12}{\csname a:TocLink\endcsname{6}{x6-1100112}{}{\ignorespaces Sample search}}{figure}\relax 
+\doTocEntry\toclof{13}{\csname a:TocLink\endcsname{6}{x6-1100213}{}{\ignorespaces Update Profile}}{figure}\relax 
+\par 
