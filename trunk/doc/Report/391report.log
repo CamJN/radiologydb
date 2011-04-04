@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  4 APR 2011 04:32
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  4 APR 2011 04:48
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -241,7 +241,7 @@ me + "' and patient[]name
 Here is how much of TeX's memory you used:
  2105 strings out of 493747
  29404 string characters out of 3143546
- 86573 words of memory out of 3000000
+ 87573 words of memory out of 3000000
  5380 multiletter control sequences out of 15000+200000
  12468 words of font info for 46 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -254,7 +254,7 @@ amsfonts/cm/cmr12.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmti10.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmti12.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmtt10.pfb>
-Output written on 391report.pdf (5 pages, 100933 bytes).
+Output written on 391report.pdf (5 pages, 101856 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream
