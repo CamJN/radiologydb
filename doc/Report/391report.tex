@@ -84,7 +84,25 @@ Connections to the database are managed by \texttt{ConnectionManager}, which pro
 \emph{*.java: } \texttt{ConnectionManager.java}\\
 \end{quote}
 \section*{Search Records}
-The home page of RaySys is the Search Records page, which allows users to find records over the columns \emph{patient\_name}, \emph{diagnosis}, and or \emph{description} defined in the \emph{radiology\_record} table. The user may specify start or end dates to limit the range of the search. By default, the results are returned by decreasing rank, where the rank of a given result record is defined as \emph{6*frequency(patient\_name) + 3*frequency(diagnosis) + frequency(description)}. Alternatively, the user select the 'Order By Date' checkbox to order the results by decreasing test can detect specify to order the results Search is available to all users, however the results are filtered depending on the user class. \#TODO
+The home page of RaySys is the Search Records page, which allows users to find records over the columns \emph{patient\_name}, \emph{diagnosis}, and or \emph{description} defined in the \emph{radiology\_record} table. The user may specify start or end dates to limit the range of the search. By default, the results are returned by decreasing rank, where the rank of a given result record is defined as \emph{6*frequency(patient\_name) + 3*frequency(diagnosis) + frequency(description)}. Alternatively, the user can use the 'Order By' combo box to order the results by increasing or decreasing \emph{test\_date}. The resulting records are displayed in a table, with the list of thumbnails dispalyed in a \texttt{ContentFlow} (see 3rd party libraries). The user can scroll through the images in the \texttt{ContentFlow} and then click on one to see the full size image in a separate browser. Record search is available to all users, however the results are filtered depending on the user class (defined in the session).
+
+Records searches are initiated by \emph{/search.jsp} which creates a new \texttt{RecordsSearch} to get a connection and carry out the actual query. \emph{search.jsp} passes in relevant parameters -- such as the search input -- and \texttt{RecordsSearch} wraps the resulting \texttt{ResultSet} to reduce the amount of back-end work done by the \emph{jsp} page. The exact query that is executed depends on the arguments that are passed to \texttt{RecordsSearch}. In particualar, the query will change slightly depending on how the user chooses to order the results, or if the user has selected to limit the results to a particular range of dates.
+
+The resulting query has the following form, where square brackets denote segments that change depending on user input:
+
+\texttt{select (6*score(1) + 3*score(2) + score(3)) as rank, record\_id, patient\_name, doctor\_name, radiologist\_name, test\_type, prescribing\_date, test\_date, diagnosis, description\\from radiology\_record\\where (contains(patient\_name, [KEYWORDS], 1) > 0 or contains(diagnosis, [KEYWORDS], 2) > 0 or contains(description, [KEYWORDS], 3) > 0)\\
+
+} \emph{if user class is patient} \texttt{and patient\_name = [USERNAME]}\\
+  \emph{if user class is radiologist} \texttt{and radiologist\_name = [USERNAME]}\\
+  \emph{if user class is doctor} \texttt{AND (doctor\_name = [USER_NAME] OR patient\_name in (SELECT patient\_name FROM family\_doctor WHERE doctor\_name = [USERNAME]))}
+        
+        [and test\_date >= to\_date([STARTDATE], 'dd/MM/yyyy')]
+        [and test\_date <= to\_date([ENDDATE], 'dd/MM/yyyy')]
+	[order by test\_date asc]
+	[order by test\_date desc]
+	[order by myscore desc]}
+
+The query is executed in a prepared statement to help protect against SQL injection.
 
 \begin{quote}
 \emph{URL:} \texttt{/radiologydb/index.jsp} \\
