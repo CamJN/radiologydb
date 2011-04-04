@@ -1,0 +1,128 @@
+\documentclass[11pt]{report}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}\begin{document}
+\begin{titlepage}
+
+\begin{center}
+
+
+\textsc{\LARGE University of Alberta}\\[1.5cm]
+
+\textsc{\Large Term Project}\\[0.5cm]
+
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries RaySyS}\\[0.4cm]
+
+\HRule \\[1.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+Steven  \textsc{Meshmeyer}\\
+Camden  \textsc{Narzt}\\
+Oscar  \textsc{Ramirez}
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professor:} \\
+Dr. Li-Yan \textsc{Yuan}
+\end{flushright}
+
+
+\end{minipage}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+\chapter*{RaySys}
+RaySys consists of several modules that allow different types of users to manage and interact a Radiological Database System. With this application users are divided into four different categories: administrators, patients, doctors, and radiologists each having different privileges. In order to summarize the system architecture and the major modules used in the system, along with their relationships and main interactions with the database this document will first describe those sections that are common to all users, and then it will be divided into specific user sections. Each section will contain a listing of the relevant \emph{*.jsp} and \emph{*.java} files for the module, along with the initial \emph{URL} which can be used to access it.
+
+\section*{Login}
+
+The login module is the first place the user will interact with RaySys. The user will first encounter this when accessing the system for the first time. At this point a login screen requesting a \texttt{username} and a \texttt{password} is shown. If the user enters information for a valid account a \emph{session variable} \texttt{userName} will be set be a String representing the user's account type. Also as expected if the information is invalid the user will be notified appropriately.
+
+The action of logging in utilizes a the servlet \texttt{LoginManager.java} which is located in the \texttt{loginModule} package. Through this server a prepared statement is created with the form \texttt{select password, class from users where user\_name = ?} and the name is set to equal the username provided. The result set that is generated from executing this query is then inspected and if a password was returned it is compared to the provided one by the user.
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/login.jsp} \\
+\emph{*.jsp: } \texttt{login.jsp} \\
+\emph{*.java: } \texttt{LoginManager.java}
+\end{quote}
+
+\section*{Profile}
+Another part of the login module is the profile. This provides an interface for the user to update most of his information. All users are allowed to change: \emph{first name, last name, password, address, email,} and \emph{ phone}. This section of the login module takes advantage of a servlet that is also used for updating user information by admins so the specifications of the servlet used can be found in the \emph{User Update} section.
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/profile.jsp} \\
+\emph{*.jsp: } \texttt{profile.jsp} \\
+\emph{*.java: } \texttt{UserUpdate.java}\\
+\emph{Note:} Further information found in \emph{User Update} section
+\end{quote}
+
+
+\section*{Connections}
+At this point it is worth mentioning how the connections to the database are managed in this application. \#TODO
+
+\begin{quote}
+\emph{*.java: } \texttt{ConnectionManager.java}\\
+\end{quote}
+\section*{Search}
+Search is available to all users, however the results are filtered depending on the user class. \#TODO
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/index.jsp} \\
+\emph{*.jsp: } \texttt{index.jsp} \\
+\end{quote}
+
+\section*{Adding Users}
+Adding users is only available to admins and the interface is very simple. Admins can add users by only setting the \emph{username, password,} and \emph{class}. This will add an entry to the \texttt{users} table in the database by utilizing the prepared statement \texttt{insert into users values (?,?,?,?)} where the values correspond to the ones listed before hand, and the fourth value is set to the registration time which is generated when the user is added.
+
+If the administrator decides to fill the remaining fields \emph{first name, last name, address, email, phone} an entry will be created in the persons entry with the supplied information.
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/new-uesr.jsp} \\
+\emph{*.jsp: } \texttt{new-user.jsp} \\
+\emph{*.java: } \texttt{NewUser.java}
+\end{quote}
+
+\section*{User Update}
+The user update module's main purpose is to be utilized by administrators. This module provides an interface for administrators to update all information for any user type. The interface for this begins by providing the administrator a search for users where he can search by username, name, or last name and can then select what user to edit from the displayed results.
+
+The interface for changing basic information is very similar to the one used to add users so no explanation should be needed. If the user to be modified is a patient or a doctor this module will display a list of all the doctors or patients available for choosing and a second list with the ones that are currently the patient/doctor's patients/doctors.
+
+In order to edit user information two prepared statements, similar to those for adding new users, are used. The first prepared stament used is \texttt{update users set password=?, class = cast(? as char(1)) where user\_name =?} and \texttt{update persons set first\_ name =?, last\_name=?, address=?, email=?, phone =? where user\_name=?}.
+
+In order to display the available doctors the statement \texttt{select UNIQUE patient\_name from family\_doctor where doctor\_name = '" + username + "'} is used. In order to make a change to the \emph{family\_doctor} table we will either add a new row with \texttt{insert into family\_doctor values('" + username + "', '" + uname + "')} or remove a row with \texttt{delete from family\_doctor where doctor\_name = '" + username + "' and patient\_name = '" + uname + "'}. Very similar queries are used for getting, adding and deleting patient rows.
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/update/index.jsp} \\
+\emph{*.jsp: } \texttt{/update/index.jsp /index/user-search.jsp /index/update.jsp} \\
+\emph{*.java: } \texttt{UserUpdate.java}
+\end{quote}
+
+\section*{Report Generation}
+
+\section*{Record Creation}
+
+\section*{Image Upload}
+
+\section*{Conclusion}
+
+
+
+\end{document}  
