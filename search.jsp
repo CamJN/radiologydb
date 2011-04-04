@@ -10,7 +10,7 @@
 	String USER_NAME = (String)session.getAttribute("username");
 	String START_DATE = request.getParameter("startDate");
 	String END_DATE = request.getParameter("endDate");
-	boolean ORDERBY_DATE = request.getParameter("order") == null ? false : true;
+	String ORDER = request.getParameter("order");
 	
 	if (START_DATE == null) START_DATE = "";
 	if (END_DATE == null) END_DATE = "";
@@ -55,17 +55,22 @@
             <input name="searchButton" id="searchButton" type="submit" value="Search" />
             <br />
             <a name="startDateAnchor" id="startDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;">Start Date</a>
-            <input type="text" name="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" size="15" />
+            <input type="text" name="startDate" id="startDate" value="<%=StringEscapeUtils.escapeHtml(START_DATE)%>" size="9" />
             <a name="endDateAnchor" id="endDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;" >End Date</a>
-            <input type="text" name="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" size="15" />
-            <input type="checkbox" name="order" id="order" value="date" <%if (ORDERBY_DATE) out.print("checked");%>/>Order By Date
+            <input type="text" name="endDate" id="endDate" value="<%=StringEscapeUtils.escapeHtml(END_DATE)%>" size="9" />
+            Order By: <select name="order" id="order">
+            	<option value="r" <% out.println((ORDER.equals("r") ? "selected=\"selected\"" : ""));%>>Rank</option>
+                <option value="i" <% out.println((ORDER.equals("i") ? "selected=\"selected\"" : ""));%>>Increasing Date</option>
+                <option value="d" <% out.println((ORDER.equals("d") ? "selected=\"selected\"" : ""));%>>Decreasing Date</option>
+            </select>
+          
         </form>
     </div>
     <div id="caldiv"></div>
     <div id="results"><%
 	RecordsQuery records = null;
 	 try {
-		 records = new RecordsQuery(SEARCH_INPUT, USER_NAME, userClass, START_DATE, END_DATE, ORDERBY_DATE);
+		 records = new RecordsQuery(SEARCH_INPUT, USER_NAME, userClass, START_DATE, END_DATE, ORDER);
 		 int recordCount = records.getRecordCount();
 		 
 		 if (records.absolute(START_INDEX)) {
@@ -109,7 +114,7 @@
 			 int numPages = (int)Math.ceil((double)recordCount/MAX_RESULTS);
 			 
 			 if (CUR_PAGE > 1) {
-				out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE-2)*MAX_RESULTS+"\">Prev</a></span>");		     }
+				out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE-2)*MAX_RESULTS+"\">Prev</a></span>");		     		 }
 				
 			 if (CUR_PAGE < numPages) {
 				 out.println("<span><a href=\"/radiologydb/search.jsp?searchInput="+SEARCH_INPUT+"&start="+(CUR_PAGE)*MAX_RESULTS+"\">Next</a></span>");
