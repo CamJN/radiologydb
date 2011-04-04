@@ -112,10 +112,17 @@ In order to display the available doctors the statement \texttt{select UNIQUE pa
 \begin{quote}
 \emph{URL:} \texttt{/radiologydb/update/index.jsp} \\
 \emph{*.jsp: } \texttt{/update/index.jsp /index/user-search.jsp /index/update.jsp} \\
-\emph{*.java: } \texttt{UserUpdate.java}
+\emph{*.java: } \texttt{UserUpdate.java PersonSearch.java}
 \end{quote}
 
 \section*{Report Generation}
+Report generation presents the user with the now very familiar search layout. This search is available to administrators and it allows them to search for a specific diagnosis in a time range. The results will then display the user information for users with the searched diagnosis along with the date of the first diagnosis for the person.
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/report/index.jsp} \\
+\emph{*.jsp: } \texttt{/report/index.jsp /report/search.jsp} \\
+\emph{*.java: } \texttt{DiagnosisSearch.java}
+\end{quote}
 
 \section*{Record Creation}
 
