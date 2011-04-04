@@ -91,14 +91,6 @@ The home page of RaySys is the Search Records page, which allows users to find r
 \emph{*.jsp: } \texttt{index.jsp} \\
 \end{quote}
 
-\section*{Search}
-Search is available to all users, however the results are filtered depending on the user class. \#TODO
-
-\begin{quote}
-\emph{URL:} \texttt{/radiologydb/index.jsp} \\
-\emph{*.jsp: } \texttt{index.jsp} \\
-\end{quote}
-
 \section*{Adding Users}
 Adding users is only available to admins and the interface is very simple. Admins can add users by only setting the \emph{username, password,} and \emph{class}. This will add an entry to the \texttt{users} table in the database by utilizing the prepared statement \texttt{insert into users values (?,?,?,?)} where the values correspond to the ones listed before hand, and the fourth value is set to the registration time which is generated when the user is added.
 

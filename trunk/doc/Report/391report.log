@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  4 APR 2011 14:40
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2010.7.21)  4 APR 2011 14:44
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -250,65 +250,60 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--92
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 98--100
-
- []
-
 [3]
-Overfull \hbox (35.8376pt too wide) in paragraph at lines 118--119
+Overfull \hbox (35.8376pt too wide) in paragraph at lines 110--111
 \OT1/cmtt/m/n/12 persons set first[] name =?, last[]name=?, address=?, email=?,
  phone =? where
  []
 
 
-Overfull \hbox (1.54001pt too wide) in paragraph at lines 120--121
+Overfull \hbox (1.54001pt too wide) in paragraph at lines 112--113
 []\OT1/cmr/m/n/12 In or-der to dis-play the avail-able doc-tors the state-ment 
 \OT1/cmtt/m/n/12 select UNIQUE patient[]name
  []
 
 
-Overfull \hbox (7.397pt too wide) in paragraph at lines 120--121
+Overfull \hbox (7.397pt too wide) in paragraph at lines 112--113
 \OT1/cmtt/m/n/12 insert into family[]doctor values('" + username + "', '" + una
 me + "') \OT1/cmr/m/n/12 or
  []
 
 
-Overfull \hbox (24.86157pt too wide) in paragraph at lines 120--121
+Overfull \hbox (24.86157pt too wide) in paragraph at lines 112--113
 \OT1/cmr/m/n/12 re-move a row with \OT1/cmtt/m/n/12 delete from family[]doctor 
 where doctor[]name = '" + username
  []
 
 
-Overfull \hbox (24.53964pt too wide) in paragraph at lines 123--126
+Overfull \hbox (24.53964pt too wide) in paragraph at lines 115--118
 \OT1/cmr/m/it/12 *.jsp:  \OT1/cmtt/m/n/12 /update/index.jsp /index/user-search.
 jsp /index/update.jsp 
  []
 
-[4]
-Overfull \hbox (5.95058pt too wide) in paragraph at lines 138--140
+
+Overfull \hbox (5.95058pt too wide) in paragraph at lines 130--132
 \OT1/cmtt/m/n/12 radiology[]record(record[] id,patient[]name,doctor[]name, radi
 ologist[]name ,
  []
 
 
-Overfull \hbox (9.40858pt too wide) in paragraph at lines 138--140
+Overfull \hbox (9.40858pt too wide) in paragraph at lines 130--132
 \OT1/cmtt/m/n/12 test[]type,prescribing[]date,test[]date,diagnosis,description)
  values (?,?,
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 149--150
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
@@ -316,7 +311,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--154
 Here is how much of TeX's memory you used:
  2103 strings out of 493747
  29351 string characters out of 3143546
- 86572 words of memory out of 3000000
+ 88572 words of memory out of 3000000
  5378 multiletter control sequences out of 15000+200000
  11862 words of font info for 44 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -327,7 +322,7 @@ c/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmr12.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmti12.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt12.pfb>
-Output written on 391report.pdf (7 pages, 84319 bytes).
+Output written on 391report.pdf (7 pages, 84159 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream
