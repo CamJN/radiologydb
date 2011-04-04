@@ -10,6 +10,11 @@
 <body>
 <%@ include file="header.jsp" %>
 <%
+if(session.getAttribute("invalidNewUser") != null && (Boolean)session.getAttribute("invalidNewUser") != true)
+{
+	session.setAttribute("invalidNewUser", false);
+}
+
 if(!(userClass.equals("a"))){
 	response.sendRedirect("/radiologydb/");
 }
