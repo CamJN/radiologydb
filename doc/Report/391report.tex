@@ -27,7 +27,7 @@
 % Author and supervisor
 \begin{minipage}{0.4\textwidth}
 \begin{flushleft} \large
-Steven  \textsc{Meshmeyer}\\
+Steven  \textsc{Maschmeyer}\\
 Camden  \textsc{Narzt}\\
 Oscar  \textsc{Ramirez}
 \end{flushleft}
@@ -76,13 +76,15 @@ Another part of the login module is the profile. This provides an interface for 
 
 
 \section*{Connections}
-At this point it is worth mentioning how the connections to the database are managed in this application. \#TODO
+Connections to the database are managed by \texttt{ConnectionManager}, which provide a static methods for opening pooled connections from an \texttt{OracleConnectionPoolDataSource}. (Note that since the server loads outdated JDBC drivers from \texttt{classes12.jar}, the connection cache was implemented using the deprecated class \texttt{OracleConnectionCacheImpl} instead of using the implicit connection caching mechanism provided by \texttt{OracleConnectionCacheManager}.)
+
+\texttt{ConnectionManager} also provides a nested class \texttt{ConnectionKit} to help ease the execution of queries, and to ensure that resources are properly closed.
 
 \begin{quote}
 \emph{*.java: } \texttt{ConnectionManager.java}\\
 \end{quote}
-\section*{Search}
-Search is available to all users, however the results are filtered depending on the user class. \#TODO
+\section*{Search Records}
+The home page of RaySys is the Search Records page, which allows users to find records over the columns \emph{patient_name}, \emph{diagnosis}, and or \emph{description} defined in the \emph{radiology_record} table. The user may specify start or end dates to limit the range of the search. By default, the results are returned by decreasing rank, where the rank of a given result record is defined as \emph{6*frequency(patient_name) + 3*frequency(diagnosis) + frequency(description)}. Alternatively, the user select the 'Order By Date' checkbox to order the results by decreasing test datecan specify to order the results Search is available to all users, however the results are filtered depending on the user class. \#TODO
 
 \begin{quote}
 \emph{URL:} \texttt{/radiologydb/index.jsp} \\
