@@ -1,4 +1,4 @@
-\documentclass[11pt]{report}
+\documentclass[12pt]{report}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
 %\geometry{landscape}                % Activate for for rotated page geometry
@@ -7,7 +7,8 @@
 \usepackage{amssymb}
 \usepackage{epstopdf}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}\begin{document}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\begin{document}
 \begin{titlepage}
 
 \begin{center}
@@ -54,7 +55,7 @@ RaySys consists of several modules that allow different types of users to manage
 
 \section*{Login}
 
-The login module is the first place the user will interact with RaySys. The user will first encounter this when accessing the system for the first time. At this point a login screen requesting a \texttt{username} and a \texttt{password} is shown. If the user enters information for a valid account a \emph{session variable} \texttt{userName} will be set be a String representing the user's account type. Also as expected if the information is invalid the user will be notified appropriately.
+The login module is the first place the user will interact with RaySys. The user will first encounter this when accessing the system for the first time. At this point a login screen requesting a \texttt{username} and a \texttt{password} is shown. If the user enters information for a valid account a \emph{session variable} \texttt{userName} will be set be a String representing the user's account type. Also as expected if the information is invalid the user will be notified appropriately. For added security sessions are set to expire after $5$ minutes, therefore if the user is inactive for a period of time any action will redirect the user to the login screen.
 
 The action of logging in utilizes a the servlet \texttt{LoginManager.java} which is located in the \texttt{loginModule} package. Through this server a prepared statement is created with the form \texttt{select password, class from users where user\_name = ?} and the name is set to equal the username provided. The result set that is generated from executing this query is then inspected and if a password was returned it is compared to the provided one by the user.
 
@@ -74,7 +75,6 @@ Another part of the login module is the profile. This provides an interface for 
 \emph{Note:} Further information found in \emph{User Update} section
 \end{quote}
 
-
 \section*{Connections}
 Connections to the database are managed by \texttt{ConnectionManager}, which provide a static methods for opening pooled connections from an \texttt{OracleConnectionPoolDataSource}. (Note that since the server loads outdated JDBC drivers from \texttt{classes12.jar}, the connection cache was implemented using the deprecated class \texttt{OracleConnectionCacheImpl} instead of using the implicit connection caching mechanism provided by \texttt{OracleConnectionCacheManager}.)
 
@@ -84,7 +84,15 @@ Connections to the database are managed by \texttt{ConnectionManager}, which pro
 \emph{*.java: } \texttt{ConnectionManager.java}\\
 \end{quote}
 \section*{Search Records}
-The home page of RaySys is the Search Records page, which allows users to find records over the columns \emph{patient_name}, \emph{diagnosis}, and or \emph{description} defined in the \emph{radiology_record} table. The user may specify start or end dates to limit the range of the search. By default, the results are returned by decreasing rank, where the rank of a given result record is defined as \emph{6*frequency(patient_name) + 3*frequency(diagnosis) + frequency(description)}. Alternatively, the user select the 'Order By Date' checkbox to order the results by decreasing test datecan specify to order the results Search is available to all users, however the results are filtered depending on the user class. \#TODO
+The home page of RaySys is the Search Records page, which allows users to find records over the columns \emph{patient\_name}, \emph{diagnosis}, and or \emph{description} defined in the \emph{radiology\_record} table. The user may specify start or end dates to limit the range of the search. By default, the results are returned by decreasing rank, where the rank of a given result record is defined as \emph{6*frequency(patient\_name) + 3*frequency(diagnosis) + frequency(description)}. Alternatively, the user select the 'Order By Date' checkbox to order the results by decreasing test can detect specify to order the results Search is available to all users, however the results are filtered depending on the user class. \#TODO
+
+\begin{quote}
+\emph{URL:} \texttt{/radiologydb/index.jsp} \\
+\emph{*.jsp: } \texttt{index.jsp} \\
+\end{quote}
+
+\section*{Search}
+Search is available to all users, however the results are filtered depending on the user class. \#TODO
 
 \begin{quote}
 \emph{URL:} \texttt{/radiologydb/index.jsp} \\
@@ -118,7 +126,7 @@ In order to display the available doctors the statement \texttt{select UNIQUE pa
 \end{quote}
 
 \section*{Report Generation}
-Report generation presents the user with the now very familiar search layout. This search is available to administrators and it allows them to search for a specific diagnosis in a time range. The results will then display the user information for users with the searched diagnosis along with the date of the first diagnosis for the person.
+Report generation presents the user with the now very familiar search layout. This search is available to administrators and it allows them to search for a specific diagnosis in a time range. The results will then display the user information for those with the searched diagnosis along with the date of the first diagnosis for the searched type.
 
 \begin{quote}
 \emph{URL:} \texttt{/radiologydb/report/index.jsp} \\
@@ -127,8 +135,8 @@ Report generation presents the user with the now very familiar search layout. Th
 \end{quote}
 
 \section*{Record Creation}
-The record creation is done in two parts, first a simple form that takes in all relevant data for a Radiology Record, then a servlet to send that data to oracle using the sql statements: "SELECT rec_id_sequence.nextval from dual" and  "insert into radiology_record(record_id,patient_name,doctor_name,radiologist_name,test_type,prescribing_date,test_date,diagnosis,description) values (?,?,?, ?,?,?, ?,?,?)" where the '?''s are replaced with the relevant data using setOBJTYPE() style methods.
-The status of the creation is flashed to the screen after the user submits and upon succes the page forwards to an image upload page with the record id already filled in, and upon failure return the user to the record create page, data intac to try and fix the data or figure out their error.  
+The record creation is done in two parts, first a simple form that takes in all relevant data for a Radiology Record, then a servlet to send that data to oracle using the sql statements: texttt{"SELECT rec\_id\_sequence.nextval from dual"} and  \texttt{"insert into radiology\_record(record\_ id,patient\_name,doctor\_name, radiologist\_name , test\_type,prescribing\_date,test\_date,diagnosis,description) values (?,?, ?, ?,?, ?, ? ,?,?)"} where the '?''s are replaced with the relevant data using \emph{setOBJTYPE()} style methods.
+The status of the creation is flashed to the screen after the user submits and upon success the page forwards to an image upload page with the record id already filled in, and upon failure return the user to the record create page, data intact to try and fix the data or figure out their error.  
 
 \begin{quote}
 \emph{*.jsp:} \texttt{/radiologydb/create-record.jsp} \\
@@ -138,19 +146,18 @@ The status of the creation is flashed to the screen after the user submits and u
 
 
 \section*{Image Upload}
-The image uploading is done in two parts the image path on the users computer and record id are chosen on one page, and then upon submit the data is passed to a servlet and the image is read in and resized to the three relevant sizes, then stored in the database using the SQL statements:
-
-	    ResultSet rset1 = stmt.executeQuery("SELECT pic_id_sequence.nextval from dual");
-	    stmt.execute( "insert into pacs_images (record_id,image_id,thumbnail,regular_size,full_size) values ("+record_id+","+pic_id+",empty_blob(),empty_blob(),empty_blob())");
+The image uploading is done in two parts the image path on the users computer and record id are chosen on one page, and then upon submit the data is passed to a servlet and the image is read in and resized to the three relevant sizes, then stored in the database using the SQL statements:\\
+        
+        \texttt{ResultSet rset1 = stmt.executeQuery("SELECT pic\_id\_sequence.nextval\\from dual");}\\
+        
+        \texttt{stmt.execute( "insert into pacs\_images (record\_id,image\_id,thumbnail,\\regular\_size, full\_size) values ("+record\_id+","+pic\_id+",\\empty\_blob(),empty\_blob(),empty\_blob())");}\\
 
 again if the upload is successful the page forwards you to the upload page with a success message, otherwise it flashes an error message and returns you to the upload page to try and fix the data.
 
-\begin{quote}
-\emph{*.jsp:} \texttt{/radiologydb/upload-image.jsp} \\
-\emph{*.java: } \texttt{UploadImage.java}
-\end{quote}
+\section*{Further Work}
+The current implementation of RaySys is a great starting point for any type of medical database system where multiple types of user must be supported. In order to improve upon this implementation several key points would have to be polished. The first thing that would need some work would be to standardize the use of ConnectionKit amongst all modules. This would provide a very cohesive and centralized interface for managing the connections and would provide a very easy way to upgrade when the database drivers are updated.
 
-\section*{Conclusion}
+Another element that could benefit the user greatly would be support for multiple image uploads. This would simplify and speed up the process of inserting long records into the database. By handling multiple image uploads at the same time several optimizations could be made to make the process faster.
 
 
 
