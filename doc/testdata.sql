@@ -65,6 +65,3 @@ insert into radiology_record values (17, 'Oscar', 'd1', 'r1', 'US', '2/mar/2011'
 insert into radiology_record values (18, 'Camden', 'd2', 'r2', 'CAT', '3/mar/2011', '3/mar/2011', 'sinitus', 'Screening for sinitus.');
 
 -- pacs_images(record_id,image_id,thumbnail,regular_size,full_size)
-
--- Indicies (MUST BE UPDATED ON INSERT)
-@index_records.sql;
