@@ -21,10 +21,14 @@
             <input name="searchInput" id="searchInput" value="" type="text" />
             <br />
             <a name="anchor1" id="startDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].startDate,'startDateAnchor','dd/MM/yyyy'); cal.showCalendar('startDateAnchor'); return false;" >Start Date</a>
-            <input type="text" name="startDate" id="startDate" value="" size="15" />
+            <input type="text" name="startDate" id="startDate" value="" size="9" />
             <a name="endDateAnchor" id="endDateAnchor" href="#" onClick="cal.select(document.forms['searchForm'].endDate,'endDateAnchor','dd/MM/yyyy'); cal.showCalendar('endDateAnchor'); return false;">End Date</a>
-            <input type="text" name="endDate" id="endDate" value="" size="15" />
-            <input type="checkbox" name="order" id="order" value="date"/>Order By Date<br />
+            <input type="text" name="endDate" id="endDate" value="" size="9" />
+            Order By: <select name="order" id="order">
+            	<option value="r">Rank</option>
+                <option value="i">Increasing Date</option>
+                <option value="d">Decreasing Date</option>
+            </select><br/>
             <input name="searchButton" id="searchButton" type="submit" value="Search" />
         </form>
     </div>

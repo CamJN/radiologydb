@@ -12,16 +12,16 @@ public class RecordsQuery {
     private ResultSet results;
     private PicsQuery pics;
 
-    public RecordsQuery(String searchInput, String username, String userClass, String startDate, String endDate, boolean orderByDate) throws SQLException {
+    public RecordsQuery(String searchInput, String username, String userClass, String startDate, String endDate, String order) throws SQLException {
         if (searchInput == null || searchInput.equals("")) return;
         if (username == null) return;
         if (userClass == null) return;
-
-        connectionKit = new ConnectionKit();
-        
+        if (order == null) order = "r";
         if (startDate != null && startDate.equals("")) startDate = null;
         if (endDate != null && endDate.equals("")) endDate = null;
         String doctorname = null;
+        
+        connectionKit = new ConnectionKit();
 
         String query = "SELECT (6*score(1) + 3*score(2) + score(3)) as myscore, record_id, patient_name, doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +
         " FROM radiology_record" +
@@ -43,8 +43,9 @@ public class RecordsQuery {
         if (startDate != null) query += " AND test_date >= to_date(?, 'dd/MM/yyyy')";
         if (endDate != null) query += " AND test_date <= to_date(?, 'dd/MM/yyyy')";
         
-        if (orderByDate) query += " ORDER BY test_date";
-        else query += " ORDER BY myscore";
+        if (order.equals("i")) query += " ORDER BY test_date asc";
+        else if (order.equals("d")) query += " ORDER BY test_date desc";
+        else query += " ORDER BY myscore desc";
         
         results = connectionKit.exec(query, searchInput, searchInput, searchInput, username, doctorname, startDate, endDate);
     }
@@ -90,11 +91,11 @@ public class RecordsQuery {
     }
     
     public String getPrescribingDate() throws SQLException {
-        return results.getString(7);
+        return results.getString(7).substring(0, results.getString(7).indexOf(':') - 1);
     }
     
     public String getTestDate() throws SQLException {
-        return results.getString(8);
+        return results.getString(8).substring(0, results.getString(8).indexOf(':') - 1);
     }
     
     public String getDiagnosis() throws SQLException {

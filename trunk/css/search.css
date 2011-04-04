@@ -50,3 +50,7 @@ td#colDescription {
 td#colThumbnails {
 	width:30%;
 }
+
+select#order {
+    background-color:WHITE;
+}

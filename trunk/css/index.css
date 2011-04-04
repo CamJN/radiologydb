@@ -10,3 +10,7 @@ input#searchInput {
 input#searchButton {
 	margin-top:0.5em;
 }
+
+select#order {
+    background-color:WHITE;
+}
